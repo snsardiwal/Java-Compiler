@@ -890,10 +890,14 @@ Expression2: Expression3 Expression2Rest
 
 /*  operators */
 
-Selectors: Selectors Selector
+Selectors: 
+           |
+           Selectors Selector
            ;
 
-PostfixOps: PostfixOps PostfixOp
+PostfixOps: 
+            |
+            PostfixOps PostfixOp
             ;
 
 Infixop:  "||"
