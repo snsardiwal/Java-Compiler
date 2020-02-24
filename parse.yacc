@@ -73,9 +73,9 @@ Identifier: IDENTIFIER
             ;
 
 DotIdentifierStar: 
-                    |
-                    DotIdentifierStar '.' Identifier
-                    ;
+                   |
+                   DotIdentifierStar '.' Identifier
+                   ;
                     
 QualifiedIdentifier: Identifier DotIdentifierStar
                      ;
@@ -94,7 +94,7 @@ PackageOptional:
 
 ImportDeclarationStar: 
                         |
-                        ImportDeclaration
+                        ImportDeclarationStar ImportDeclaration
                         ;
 
 TypeDeclarations: 
@@ -102,14 +102,9 @@ TypeDeclarations:
                  TypeDeclarations TypeDeclaration
                  ;
 
-DotIdentifierStar: 
-                   |
-                   DotIdentifierStar '.' Identifier
-                   ;
-
 DotStarOptional: 
                  | 
-                 '.' '*' 
+                 ". *" 
                  ;
 
 ModifierStar: 
@@ -138,15 +133,15 @@ ExtendsTypeListOptional:
                          ;
 
 CompilationUnit: PackageOptional ImportDeclarationStar TypeDeclarations
-                 |
-                 ImportDeclarationStar TypeDeclarations
                  ;
 
 ImportDeclaration: import static Identifier DotIdentifierStar DotStarOptional ';'
+                   |
+                   import Identifier DotIdentifierStar DotStarOptional ';'
                    ;
 
 TypeDeclaration: ClassOrInterfaceDeclaration
-                ;
+                 ;
 
 ClassOrInterfaceDeclaration: ModifierStar ClassDeclaration 
                              |
@@ -194,7 +189,9 @@ TypeArgumentListStar:
                       TypeArgumentListStar ',' TypeArgument
                       ;
 
-ExtendSuperOptional: extends ReferenceType
+ExtendSuperOptional: 
+                     |
+                     extends ReferenceType
                      |
                      super ReferenceType
                      ;
@@ -220,6 +217,7 @@ BasicType: byte
            |
            boolean 
            ;
+
 ReferenceType: Identifier TypeArgumentsOptional IdentifierTypeArgumentStar
                ;
 
@@ -260,12 +258,12 @@ NonWildcardTypeArguments: '<' TypeList '>'
 TypeList: ReferenceType ReferenceTypeListStar
           ;                          
 
-TypeArgumentsOrDiamond: '<''>'
+TypeArgumentsOrDiamond: "< >"
                         |
                         TypeArguments 
                         ;
 
-NonWildcardTypeArgumentsOrDiamond: '<''>'
+NonWildcardTypeArgumentsOrDiamond: "< >"
                                    |
                                    NonWildcardTypeArguments
                                    ;
@@ -362,7 +360,9 @@ ElementValue: Annotation
               ElementValueArrayInitializer
               ;
 
-ElementValueArrayInitializer: ElementValuesOptional CommaOptional
+ElementValueArrayInitializer: 
+                              |
+                              ElementValueArrayInitializer ElementValuesOptional CommaOptional
                               ;
 
 ElementValues: ElementValue ElementValueListStar 
@@ -377,7 +377,9 @@ ModifierStar:
               ModifierStar Modifier
               ;
 
-ThrowsQualifiedOptional: throws QualifiedIdentifierList 
+ThrowsQualifiedOptional: 
+                         |
+                         throws QualifiedIdentifierList 
                          ;
 
 BlockOrSemicolon: Block
@@ -564,7 +566,23 @@ VariableInitializer: ArrayInitializer
                      Expression 
                      ;
 
-ArrayInitializer:  //TODO                    
+VariableInitializerListStar: 
+                            |
+                            VariableInitializerListStar ',' VariableInitializer
+                            ;
+VariableInitializerUtil : 
+                          |
+                          VariableInitializer  VariableInitializerListStar  CommaOptional 
+                          ;
+ArrayInitializerUtil: 
+                      |
+                      ArrayInitializerUtil VariableInitializerUtil; 
+                      ;
+
+ArrayInitializer:  
+                  |
+                  ArrayInitializerUtil 
+                  ;             
 
 /* Formal Parameters*/
 
@@ -987,9 +1005,7 @@ IdentifierSuffix: Arguments
 
 SquareBraceStar: 
                  |
-                 SquareBraceStar 
-                 |
-                 "[]"
+                 SquareBraceStar "[]"
                  ;
 
 ExpressionListStar: 
