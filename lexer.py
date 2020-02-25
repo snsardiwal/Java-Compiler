@@ -9,7 +9,16 @@ tokens = (
 		'Seperator',
 		'Operator',
 		'Literal',
-		'Identifier'
+		'IDENTIFIER','abstract','based','continue','for','new','switch','default','if','package','synchronized',
+        'boolean','do','goto','private','this',
+        'break','double','implements','protected','throw',
+        'byte','else','import','public',
+        'case','instanceof','return','transient',
+        'catch','extends','int','short','try',
+        'char','final','interface','static','void',
+        'class','finally','long','strictfp','volatile',
+        'float','native','super','while','assert','const',
+        'enum','true','false','null','throws'
 	)
 
 
@@ -24,20 +33,32 @@ def t_err(t):
 	print("Illegal character '%s'" % t.value)
 	t.lexer.skip(1)
 
-t_Keyword = r'''
-			abstract|continue|for|new|switch|
-			assert|default|if|package|synchronized|
-			boolean|double|goto|private|this|
-			break|do|implements|protected|throw|
-			byte|else|import|public|throws|
-			case|enum|instanceof|return|transient|
-			catch|extends|int|short|try|
-			char|final|interface|static|void|
-			class|finally|long|strictfp|volatile|
-			const|float|native|super|while
-			'''
+# t_Keyword = r'''
+# 			abstract|continue|for|new|switch|
+# 			assert|default|if|package|synchronized|
+# 			boolean|double|goto|private|this|
+# 			break|do|implements|protected|throw|
+# 			byte|else|import|public|throws|
+# 			case|enum|instanceof|return|transient|
+# 			catch|extends|int|short|try|
+# 			char|final|interface|static|void|
+# 			finally|long|strictfp|volatile|
+# 			const|float|native|super|while
+# 			'''
 		
-
+keyword = ('abstract','based','continue','for','new','switch','default','if','package','synchronized',
+        'boolean','do','goto','private','this',
+        'break','double','implements','protected','throw',
+        'byte','else','import','public',
+        'case','instanceof','return','transient',
+        'catch','extends','int','short','try',
+        'char','final','interface','static','void',
+        'class','finally','long','strictfp','volatile',
+        'float','native','super','while','assert','const',
+        'enum','true','false','null','throws')
+		
+t_class = r'''class
+		   '''
 
 t_Seperator = r'::|@|\.\.\.|\.|,|;|\]|\[|\}|\{|\)|\('
 t_Operator = r'>>>=|>>=|<<=|%=|\^=|\|=|&=|/=|\*=|-=|\+=|>>>|>>|<<|%|\^|\||&|/|\*|-|\+|--|\+\+|\|\||&&|!=|<=|>=|==|->|:|\?|~|!|<|>|='
@@ -63,7 +84,12 @@ t_Literal = r'''
 			((')([^\n\r'\\] | \\b | \\f | \\t | \\n | \\r | \\' | \\\" | \\\\ | \\u[0-9a-fA-F]{4} | \\[0-7]{1,2} | \\[0-3][0-7]{2})('))
 			'''
 
-t_Identifier = r'[a-zA-Z\$_][a-zA-Z\$_0-9]*'
+# t_IDENTIFIER = r'[a-zA-Z\$_][a-zA-Z\$_0-9]*'
+def t_IDENTIFIER(t):
+    r'[a-zA-Z\$_][a-zA-Z\$_0-9]*'
+    if t.value in keyword:
+        t.type = t.value.lower()
+    return t
 
 precedence = (
 	('left','err'),
