@@ -774,7 +774,7 @@ def p_FloatingPointType(p):
 	'''
 
 def p_ReferenceType(p):
-	'''ReferenceType : ClassoOrInterfaceType
+	'''ReferenceType : ClassOrInterfaceType
 					| TypeVariable
 					| ArrayType
 	'''
@@ -789,6 +789,11 @@ def p_ClassType(p):
 
 def p_InterfaceType(p):
 	''' InterfaceType : ClassOrInterfaceType
+	'''
+
+def p_TypeVariable(p):
+	'''TypeVariable : Identifier
+				   | Annotations Identifier
 	'''
 
 def p_ArrayType(p):
@@ -870,7 +875,7 @@ def p_Wildcard(p):
 
 def p_WildcardBounds(p):
 	'''WildcardBounds : extends ReferenceType
-					 | super Reference Type 
+					 | super ReferenceType 
 	'''
 
 
@@ -1053,7 +1058,7 @@ def p_WhileStatement(p):
 	'''
 
 def p_WhileStatementNoShortIf(p):
-	'''WhileStaementNoShortIf : while '(' Expression ')' StatementNoShortIf
+	'''WhileStatementNoShortIf : while '(' Expression ')' StatementNoShortIf
 	'''
 def p_DoStatement(p):
 	'''DoStatement : do Statement while '(' Expression ')' ';'
@@ -1114,6 +1119,10 @@ def p_EnhancedForStatement(p):
 							| for '(' VariableModifierStar UnannType VariableDeclaratorId ':' Expression ')' Statement
 	'''
 
+def p_EnhancedForStatementNoShortIf(p):
+	'''EnhancedForStatementNoShortIf : for '(' UnannType VariableDeclaratorId ':' Expression ')' StatementNoShortIf
+							| for '(' VariableModifierStar UnannType VariableDeclaratorId ':' Expression ')' StatementNoShortIf
+	'''
 
 def p_BreakStatement(p):
 	'''BreakStatement : break ';'
@@ -1179,9 +1188,9 @@ def p_Finally(p):
 
 def p_TryWithResourcesStatement(p):
 	'''TryWithResourcesStatement : try ResourceSpecification Block 
-								| try ResourceSpecification Block  catches
+								| try ResourceSpecification Block  Catches
 								| try ResourceSpecification Block finally
-								| try ResourceSpecification Block  catches finally
+								| try ResourceSpecification Block  Catches finally
 	'''
 
 def p_ResourceSpecification(p):
