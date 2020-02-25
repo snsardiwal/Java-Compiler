@@ -83,832 +83,838 @@ Rule 58    ClassOrInterfaceTypeToInstantiate -> Identifier AnnoIdenStar
 Rule 59    ClassOrInterfaceTypeToInstantiate -> Annotations Identifier
 Rule 60    ClassOrInterfaceTypeToInstantiate -> Identifier TypeArgumentsOrDiamond
 Rule 61    ClassOrInterfaceTypeToInstantiate -> Identifier
-Rule 62    TypeArgumentsOrDiamond -> TypeArguments
-Rule 63    TypeArgumentsOrDiamond -> < >
-Rule 64    FieldAccess -> Primary . Identifier
-Rule 65    FieldAccess -> super . Identifier
-Rule 66    FieldAccess -> Name . super . Identifier
-Rule 67    ArrayAccess -> Name [ Expression ]
-Rule 68    ArrayAccess -> PrimaryNoNewArray [ Expression ]
-Rule 69    MethodInvocation -> Name ( ArgumentList )
-Rule 70    MethodInvocation -> Name ( )
-Rule 71    MethodInvocation -> Name . TypeArguments Identifier ( ArgumentList )
-Rule 72    MethodInvocation -> Name . Identifier ( ArgumentList )
-Rule 73    MethodInvocation -> Name . Identifier ( )
-Rule 74    MethodInvocation -> Primary . TypeArguments Identifier ( ArgumentList )
-Rule 75    MethodInvocation -> Primary . Identifier ( ArgumentList )
-Rule 76    MethodInvocation -> Primary . Identifier ( )
-Rule 77    MethodInvocation -> super . TypeArguments Identifier ( ArgumentList )
-Rule 78    MethodInvocation -> super . Identifier ( ArgumentList )
-Rule 79    MethodInvocation -> super . Identifier ( )
-Rule 80    MethodInvocation -> Name . super . TypeArguments Identifier ( ArgumentList )
-Rule 81    MethodInvocation -> Name . super . Identifier ( ArgumentList )
-Rule 82    MethodInvocation -> Name . super . Identifier ( )
-Rule 83    ArgumentList -> Expression
-Rule 84    ArgumentList -> ArgumentList , Expression
-Rule 85    MethodReference -> Name : : TypeArguments Identifier
-Rule 86    MethodReference -> ReferenceType : : TypeArguments Identifier
-Rule 87    MethodReference -> Primary : : TypeArguments Identifier
-Rule 88    MethodReference -> super : : TypeArguments Identifier
-Rule 89    MethodReference -> Name . super : : TypeArguments Identifier
-Rule 90    MethodReference -> ClassType : : TypeArguments new
-Rule 91    MethodReference -> Name : : Identifier
-Rule 92    MethodReference -> ReferenceType : : Identifier
-Rule 93    MethodReference -> Primary : : Identifier
-Rule 94    MethodReference -> super : : Identifier
-Rule 95    MethodReference -> Name . super : : Identifier
-Rule 96    MethodReference -> ClassType : : new
-Rule 97    MethodReference -> ArrayType : : new
-Rule 98    ArrayCreationExpression -> new PrimitiveType DimExprs Dims
-Rule 99    ArrayCreationExpression -> new ClassOrInterfaceType DimExprs Dims
-Rule 100   ArrayCreationExpression -> new PrimitiveType DimExprs
-Rule 101   ArrayCreationExpression -> new ClassOrInterfaceType DimExprs
-Rule 102   ArrayCreationExpression -> new PrimitiveType Dims ArrayInitializer
-Rule 103   ArrayCreationExpression -> new ClassOrInterfaceType Dims ArrayInitializer
-Rule 104   DimExprs -> DimExpr
-Rule 105   DimExprs -> DimExpr DimExprs
-Rule 106   DimExpr -> Annotations [ Expression ]
-Rule 107   Expression -> LambdaExpression
-Rule 108   Expression -> AssignmentExpression
-Rule 109   LambdaExpression -> LambdaParameters - > LambdaBody
-Rule 110   LambdaParameters -> Identifier
-Rule 111   LambdaParameters -> ( FormalParameterList )
-Rule 112   LambdaParameters -> ( )
-Rule 113   LambdaParameters -> ( InferredFormalParameterList )
-Rule 114   InferredFormalParameterList -> Identifier
-Rule 115   InferredFormalParameterList -> Identifier , InferredFormalParameterList
-Rule 116   LambdaBody -> Expression
-Rule 117   LambdaBody -> Block
-Rule 118   AssignmentExpression -> ConditionalExpression
-Rule 119   AssignmentExpression -> Assignment
-Rule 120   Assignment -> LeftHandSide AssignmentOperator Expression
-Rule 121   LeftHandSide -> Name
-Rule 122   LeftHandSide -> FieldAccess
-Rule 123   LeftHandSide -> ArrayAccess
-Rule 124   AssignmentOperator -> =
-Rule 125   AssignmentOperator -> * =
-Rule 126   AssignmentOperator -> / =
-Rule 127   AssignmentOperator -> % =
-Rule 128   AssignmentOperator -> + =
-Rule 129   AssignmentOperator -> - =
-Rule 130   AssignmentOperator -> < < =
-Rule 131   AssignmentOperator -> > > =
-Rule 132   AssignmentOperator -> > > > =
-Rule 133   AssignmentOperator -> & =
-Rule 134   AssignmentOperator -> ^ =
-Rule 135   AssignmentOperator -> | =
-Rule 136   ConditionalExpression -> ConditionalOrExpression
-Rule 137   ConditionalExpression -> ConditionalOrExpression ? Expression : ConditionalExpression
-Rule 138   ConditionalExpression -> ConditionalOrExpression ? Expression : LambdaExpression
-Rule 139   ConditionalOrExpression -> ConditionalAndExpression
-Rule 140   ConditionalOrExpression -> ConditionalAndExpression & & ConditionalOrExpression
-Rule 141   ConditionalAndExpression -> InclusiveOrExpression
-Rule 142   ConditionalAndExpression -> ConditionalAndExpression & & InclusiveOrExpression
-Rule 143   InclusiveOrExpression -> ExclusiveOrExpression
-Rule 144   InclusiveOrExpression -> InclusiveOrExpression | ExclusiveOrExpression
-Rule 145   ExclusiveOrExpression -> AndExpression
-Rule 146   ExclusiveOrExpression -> ExclusiveOrExpression ^ AndExpression
-Rule 147   AndExpression -> EqualityExpression
-Rule 148   AndExpression -> AndExpression & EqualityExpression
-Rule 149   EqualityExpression -> RelationalExpression
-Rule 150   EqualityExpression -> EqualityExpression = = RelationalExpression
-Rule 151   EqualityExpression -> EqualityExpression ! = RelationalExpression
-Rule 152   RelationalExpression -> ShiftExpression
-Rule 153   RelationalExpression -> RelationalExpression < ShiftExpression
-Rule 154   RelationalExpression -> RelationalExpression > ShiftExpression
-Rule 155   RelationalExpression -> RelationalExpression < = ShiftExpression
-Rule 156   RelationalExpression -> RelationalExpression > = ShiftExpression
-Rule 157   RelationalExpression -> RelationalExpression instanceof ReferenceType
-Rule 158   ShiftExpression -> AdditiveExpression
-Rule 159   ShiftExpression -> ShiftExpression < < AdditiveExpression
-Rule 160   ShiftExpression -> ShiftExpression > > AdditiveExpression
-Rule 161   ShiftExpression -> ShiftExpression > > > AdditiveExpression
-Rule 162   AdditiveExpression -> MultiplicativeExpression
-Rule 163   AdditiveExpression -> AdditiveExpression + MultiplicativeExpression
-Rule 164   AdditiveExpression -> AdditiveExpression - MultiplicativeExpression
-Rule 165   MultiplicativeExpression -> UnaryExpression
-Rule 166   MultiplicativeExpression -> MultiplicativeExpression * UnaryExpression
-Rule 167   MultiplicativeExpression -> MultiplicativeExpression / UnaryExpression
-Rule 168   MultiplicativeExpression -> MultiplicativeExpression % UnaryExpression
-Rule 169   UnaryExpression -> PreIncrementExpression
-Rule 170   UnaryExpression -> PreDecrementExpression
-Rule 171   UnaryExpression -> + UnaryExpression
-Rule 172   UnaryExpression -> - UnaryExpression
-Rule 173   UnaryExpression -> UnaryExpressionNotPlusMinus
-Rule 174   PreIncrementExpression -> + + UnaryExpression
-Rule 175   PreDecrementExpression -> - - UnaryExpression
-Rule 176   UnaryExpressionNotPlusMinus -> PostfixExpression
-Rule 177   UnaryExpressionNotPlusMinus -> ~ UnaryExpression
-Rule 178   UnaryExpressionNotPlusMinus -> ! UnaryExpression
-Rule 179   UnaryExpressionNotPlusMinus -> CastExpression
-Rule 180   PostfixExpression -> Primary
-Rule 181   PostfixExpression -> Name
-Rule 182   PostfixExpression -> PostIncrementExpression
-Rule 183   PostfixExpression -> PostDecrementExpression
-Rule 184   PostIncrementExpression -> PostfixExpression + +
-Rule 185   PostDecrementExpression -> PostfixExpression - -
-Rule 186   CastExpression -> ( PrimitiveType ) UnaryExpression
-Rule 187   CastExpression -> ( ReferenceType AdditionalBoundS ) UnaryExpressionNotPlusMinus
-Rule 188   CastExpression -> ( ReferenceType AdditionalBoundS ) LambdaExpression
-Rule 189   ConstantExpression -> Expression
-Rule 190   Identifier -> IDENTIFIER
-Rule 191   Name -> SimpleName
-Rule 192   Name -> QualifiedName
-Rule 193   SimpleName -> Identifier
-Rule 194   QualifiedName -> Name . Identifier
-Rule 195   ClassDeclaration -> NormalClassDeclaration
-Rule 196   ClassDeclaration -> EnumDeclaration
-Rule 197   NormalClassDeclaration -> Modifiers class Identifier TypeParameters Superclass Superinterfaces ClassBody
-Rule 198   NormalClassDeclaration -> class Identifier TypeParameters Superclass Superinterfaces ClassBody
-Rule 199   NormalClassDeclaration -> Modifiers class Identifier TypeParameters Superclass ClassBody
-Rule 200   NormalClassDeclaration -> class Identifier TypeParameters Superclass ClassBody
-Rule 201   NormalClassDeclaration -> Modifiers class Identifier TypeParameters Superinterfaces ClassBody
-Rule 202   NormalClassDeclaration -> class Identifier TypeParameters Superinterfaces ClassBody
-Rule 203   NormalClassDeclaration -> Modifiers class Identifier TypeParameters ClassBody
-Rule 204   NormalClassDeclaration -> class Identifier TypeParameters ClassBody
-Rule 205   NormalClassDeclaration -> Modifiers class Identifier Superclass Superinterfaces ClassBody
-Rule 206   NormalClassDeclaration -> class Identifier Superclass Superinterfaces ClassBody
-Rule 207   NormalClassDeclaration -> Modifiers class Identifier Superclass ClassBody
-Rule 208   NormalClassDeclaration -> class Identifier Superclass ClassBody
-Rule 209   NormalClassDeclaration -> Modifiers class Identifier Superinterfaces ClassBody
-Rule 210   NormalClassDeclaration -> class Identifier Superinterfaces ClassBody
-Rule 211   NormalClassDeclaration -> Modifiers class Identifier ClassBody
-Rule 212   NormalClassDeclaration -> class Identifier ClassBody
-Rule 213   Modifiers -> Modifier
-Rule 214   Modifiers -> Modifiers Modifier
-Rule 215   Modifier -> public
-Rule 216   Modifier -> protected
-Rule 217   Modifier -> private
-Rule 218   Modifier -> static
-Rule 219   Modifier -> abstract
-Rule 220   Modifier -> final
-Rule 221   Modifier -> native
-Rule 222   Modifier -> synchronized
-Rule 223   Modifier -> transient
-Rule 224   Modifier -> volatile
-Rule 225   TypeParameters -> < TypeParameterList >
-Rule 226   TypeParameterList -> TypeParameter
-Rule 227   TypeParameterList -> TypeParameter CommaTypeParameterStar
-Rule 228   CommaTypeParameterStar -> , TypeParameter
-Rule 229   CommaTypeParameterStar -> CommaTypeParameterStar , TypeParameter
-Rule 230   Superclass -> extends ClassType
-Rule 231   Superinterfaces -> implements InterfaceTypeList
-Rule 232   InterfaceTypeList -> InterfaceType
-Rule 233   InterfaceTypeList -> InterfaceType CommaInterfaceTypeStar
-Rule 234   CommaInterfaceTypeStar -> , InterfaceType
-Rule 235   CommaInterfaceTypeStar -> CommaInterfaceTypeStar , InterfaceType
-Rule 236   ClassBody -> ClassBody ClassBodyDeclarationStar
-Rule 237   ClassBody -> <empty>
-Rule 238   ClassBodyeclarationStar -> ClassBodyeclarationStar ClassBodyeclaration
-Rule 239   ClassBodyeclaration -> ClassMemberDeclaration
-Rule 240   ClassBodyeclaration -> InstanceInitializer
-Rule 241   ClassBodyeclaration -> StaticInitializer
-Rule 242   ClassBodyeclaration -> ConstructorDeclaration
-Rule 243   ClassMemberDeclaration -> FieldDeclaration
-Rule 244   ClassMemberDeclaration -> MethodDeclaration
-Rule 245   ClassMemberDeclaration -> ClassDeclaration
-Rule 246   FieldDeclaration -> Modifiers UnannType VariableDeclaratorList
-Rule 247   FieldDeclaration -> UnannType VariableDeclaratorList
-Rule 248   VariableDeclaratorList -> VariableDeclarator CommaVariableDeclaratorStar
-Rule 249   VariableDeclaratorList -> VariableDeclarator
-Rule 250   CommaVariableDeclaratorStar -> , VariableDeclarator
-Rule 251   CommaVariableDeclaratorStar -> CommaVariableDeclaratorStar , VariableDeclarator
-Rule 252   VariableDeclarator -> VariableDeclaratorId = VariableInitializer
-Rule 253   VariableDeclarator -> VariableDeclaratorId
-Rule 254   VariableDeclaratorId -> Identifier Dims
-Rule 255   VariableDeclaratorId -> Identifier
-Rule 256   VariableInitializer -> Expression
-Rule 257   VariableInitializer -> ArrayInitializer
-Rule 258   UnannType -> UnannPrimitiveType
-Rule 259   UnannType -> UnannReferenceType
-Rule 260   UnannPrimitiveType -> NumericType
-Rule 261   UnannPrimitiveType -> boolean
-Rule 262   UnannReferenceType -> UnannClassOrInterfaceType
-Rule 263   UnannReferenceType -> UnannTypeVariable
-Rule 264   UnannReferenceType -> UnannArrayType
-Rule 265   UnannClassOrInterfaceType -> UnannClassType
-Rule 266   UnannClassOrInterfaceType -> UnannInterfaceType
-Rule 267   UnannClassType -> Identifier TypeArguments
-Rule 268   UnannClassType -> Identifier
-Rule 269   UnannClassType -> UnannClassOrInterfaceType . Annotations Identifier TypeArguments
-Rule 270   UnannClassType -> UnannClassOrInterfaceType . Annotations Identifier
-Rule 271   UnannClassType -> UnannClassOrInterfaceType . Identifier TypeArguments
-Rule 272   UnannClassType -> UnannClassOrInterfaceType . Identifier
-Rule 273   UnannInterfaceType -> UnannClassType
-Rule 274   UnannTypeVariable -> Identifier
-Rule 275   UnannArrayType -> UnannPrimitiveType Dims
-Rule 276   UnannArrayType -> UnannClassOrInterfaceType Dims
-Rule 277   UnannArrayType -> UnannTypeVariable Dims
-Rule 278   MethodDeclaration -> Modifiers MethodHeader MethodBody
-Rule 279   MethodHeader -> Result MethodDeclarator Throws
-Rule 280   MethodHeader -> Result MethodDeclarator
-Rule 281   MethodHeader -> TypeParameters Annotations Result MethodDeclarator Throws
-Rule 282   MethodHeader -> TypeParameters Annotations Result MethodDeclarator
-Rule 283   Result -> UnannType
-Rule 284   Result -> void
-Rule 285   MethodDeclarator -> Identifier ( FormalParameterList ) Dims
-Rule 286   MethodDeclarator -> Identifier ( ) Dims
-Rule 287   MethodDeclarator -> Identifier ( FormalParameterList )
-Rule 288   MethodDeclarator -> Identifier ( )
-Rule 289   FormalParameterList -> ReceiverParameter
-Rule 290   FormalParameterList -> FormalParameters , LastFormalParameter
-Rule 291   FormalParameterList -> LastFormalParameter
-Rule 292   FormalParameters -> FormalParameter CommaFormalParameters
-Rule 293   FormalParameters -> ReceiverParameter CommaFormalParameters
-Rule 294   FormalParameters -> FormalParameter
-Rule 295   FormalParameters -> ReceiverParameter
-Rule 296   CommaFormalParameters -> , FormalParameter
-Rule 297   CommaFormalParameters -> CommaFormalParameters , FormalParameter
-Rule 298   FormalParameter -> Modifiers UnannType VariableDeclaratorId
-Rule 299   FormalParameter -> UnannType VariableDeclaratorId
-Rule 300   LastFormalParameter -> Modifiers UnannType Annotations . . . VariableDeclaratorId
-Rule 301   LastFormalParameter -> FormalParameter
-Rule 302   ReceiverParameter -> Annotations UnannType Identifier . this
-Rule 303   ReceiverParameter -> Annotations UnannType this
-Rule 304   Throws -> throws ExceptionTypeList
-Rule 305   ExceptionTypeList -> ExceptionType CommaExceptionTypes
-Rule 306   ExceptionTypeList -> ExceptionType
-Rule 307   CommaExceptionTypes -> , ExceptionType
-Rule 308   CommaExceptionTypes -> CommaExceptionTypes , ExceptionType
-Rule 309   ExceptionType -> ClassType
-Rule 310   ExceptionType -> TypeVariable
-Rule 311   MethodBody -> Block
-Rule 312   MethodBody -> ;
-Rule 313   InstanceInitializer -> Block
-Rule 314   StaticInitializer -> static Block
-Rule 315   ConstructorDeclaration -> Modifiers ConstructorDeclarator Throws ConstructorBody
-Rule 316   ConstructorDeclaration -> ConstructorDeclarator Throws ConstructorBody
-Rule 317   ConstructorDeclaration -> ConstructorDeclarator ConstructorBody
-Rule 318   ConstructorDeclaration -> Modifiers ConstructorDeclarator ConstructorBody
-Rule 319   ConstructorDeclarator -> TypeParameters SimpleTypeName ( FormalParameterList )
-Rule 320   ConstructorDeclarator -> SimpleTypeName ( FormalParameterList )
-Rule 321   ConstructorDeclarator -> SimpleTypeName ( )
-Rule 322   ConstructorDeclarator -> TypeParameters SimpleTypeName ( )
-Rule 323   SimpleTypeName -> Identifier
-Rule 324   ConstructorBody -> ConstructorBody ExplicitConstructorInvocation BlockStatements
-Rule 325   ConstructorBody -> ConstructorBody BlockStatements
-Rule 326   ConstructorBody -> ConstructorBody ExplicitConstructorInvocation
-Rule 327   ConstructorBody -> <empty>
-Rule 328   ExplicitConstructorInvocation -> TypeArguments this ( ArgumentList ) ;
-Rule 329   ExplicitConstructorInvocation -> this ( ArgumentList ) ;
-Rule 330   ExplicitConstructorInvocation -> TypeArguments this ( ) ;
-Rule 331   ExplicitConstructorInvocation -> this ( ) ;
-Rule 332   ExplicitConstructorInvocation -> TypeArguments super ( ArgumentList ) ;
-Rule 333   ExplicitConstructorInvocation -> super ( ArgumentList ) ;
-Rule 334   ExplicitConstructorInvocation -> super ( ) ;
-Rule 335   ExplicitConstructorInvocation -> TypeArguments super ( ) ;
-Rule 336   ExplicitConstructorInvocation -> Name . TypeArguments super ( ArgumentList ) ;
-Rule 337   ExplicitConstructorInvocation -> Name . TypeArguments super ( ) ;
-Rule 338   ExplicitConstructorInvocation -> Name . super ( ArgumentList ) ;
-Rule 339   ExplicitConstructorInvocation -> Name . super ( ) ;
-Rule 340   ExplicitConstructorInvocation -> Primary . TypeArguments super ( ArgumentList ) ;
-Rule 341   ExplicitConstructorInvocation -> Primary . TypeArguments super ( ) ;
-Rule 342   ExplicitConstructorInvocation -> Primary . super ( ArgumentList ) ;
-Rule 343   ExplicitConstructorInvocation -> Primary . super ( ) ;
-Rule 344   EnumDeclaration -> Modifiers enum Identifier Superinterfaces EnumBody
-Rule 345   EnumDeclaration -> Modifiers enum Identifier EnumBody
-Rule 346   EnumDeclaration -> enum Identifier EnumBody
-Rule 347   EnumDeclaration -> enum Identifier Superinterfaces EnumBody
-Rule 348   EnumBody -> <empty>
-Rule 349   EnumBody -> EnumBody EnumConstantList , EnumBodyDeclarations
-Rule 350   EnumBody -> EnumBody EnumConstantList ,
-Rule 351   EnumBody -> EnumBody EnumConstantList EnumBodyDeclarations
-Rule 352   EnumBody -> EnumBody EnumConstantList
-Rule 353   EnumBody -> EnumBody , EnumBodyDeclarations
-Rule 354   EnumBody -> EnumBody ,
-Rule 355   EnumBody -> EnumBody EnumBodyDeclarations
-Rule 356   EnumConstantList -> EnumConstant CommaEnumConstants
-Rule 357   EnumConstantList -> EnumConstant
-Rule 358   CommaEnumConstants -> , EnumConstant
-Rule 359   CommaEnumConstants -> CommaEnumConstants , EnumConstant
-Rule 360   EnumConstant -> EnumConstantModifiers Identifier ( ArgumentList ) ClassBody
-Rule 361   EnumConstant -> EnumConstantModifiers Identifier ( ) ClassBody
-Rule 362   EnumConstant -> EnumConstantModifiers Identifier ClassBody
-Rule 363   EnumConstant -> EnumConstantModifiers Identifier ( ArgumentList )
-Rule 364   EnumConstant -> EnumConstantModifiers Identifier ( )
-Rule 365   EnumConstant -> EnumConstantModifiers Identifier
-Rule 366   EnumConstant -> Identifier ( ArgumentList ) ClassBody
-Rule 367   EnumConstant -> Identifier ( ) ClassBody
-Rule 368   EnumConstant -> Identifier ClassBody
-Rule 369   EnumConstant -> Identifier
-Rule 370   EnumConstant -> Identifier ( ArgumentList )
-Rule 371   EnumConstant -> Identifier ( )
-Rule 372   EnumConstantModifier -> Annotation
-Rule 373   EnumBodyDeclarations -> ; ClassBodyDeclarationStar
-Rule 374   EnumBodyDeclarations -> ;
-Rule 375   ClassBodyDeclarationStar -> ClassBodyDeclaration
-Rule 376   ClassBodyDeclarationStar -> ClassBodyDeclarationStar ClassBodyDeclaration
-Rule 377   EnumConstantModifiers -> EnumConstantModifier
-Rule 378   EnumConstantModifiers -> EnumConstantModifiers EnumConstantModifier
-Rule 379   Type -> PrimitiveType
-Rule 380   Type -> ReferenceType
-Rule 381   PrimitiveType -> NumericType
-Rule 382   PrimitiveType -> Annotations NumericType
-Rule 383   PrimitiveType -> boolean
-Rule 384   PrimitiveType -> Annotations boolean
-Rule 385   Annotations -> Annotation
-Rule 386   Annotations -> Annotations Annotation
-Rule 387   NumericType -> IntegralType
-Rule 388   NumericType -> FloatingPointType
-Rule 389   IntegralType -> byte
-Rule 390   IntegralType -> short
-Rule 391   IntegralType -> int
-Rule 392   IntegralType -> long
-Rule 393   IntegralType -> char
-Rule 394   FloatingPointType -> float
-Rule 395   FloatingPointType -> double
-Rule 396   ReferenceType -> ClassoOrInterfaceType
-Rule 397   ReferenceType -> TypeVariable
-Rule 398   ReferenceType -> ArrayType
-Rule 399   ClassOrInterfaceType -> Name
-Rule 400   ClassType -> ClassOrInterfaceType
-Rule 401   InterfaceType -> ClassOrInterfaceType
-Rule 402   ArrayType -> PrimitiveType [ ]
-Rule 403   ArrayType -> Name [ ]
-Rule 404   ArrayType -> ArrayType [ ]
-Rule 405   Dims -> [ ]
-Rule 406   Dims -> [ ] sqAnnotations
-Rule 407   Dims -> Annotations [ ]
-Rule 408   Dims -> Annotations [ ] sqAnnotations
-Rule 409   sqAnnotations -> [ ]
-Rule 410   sqAnnotations -> sqAnnotations [ ]
-Rule 411   sqAnnotations -> sqAnnotations Annotations [ ]
-Rule 412   TypeParameter -> Identifier
-Rule 413   TypeParameter -> Identifier TypeBound
-Rule 414   TypeParameter -> TypeParameterModifiers Identifier
-Rule 415   TypeParameter -> TypeParameterModifiers Identifier TypeBound
-Rule 416   TypeParameterModifiers -> TypeParameterModifier
-Rule 417   TypeParameterModifiers -> TypeParameterModifiers TypeParameterModifier
-Rule 418   TypeParameterModifier -> Annotation
-Rule 419   TypeBound -> extends TypeVariable
-Rule 420   TypeBound -> extends ClassOrInterfaceType
-Rule 421   TypeBound -> extends ClassOrInterfaceType AdditionalBounds
-Rule 422   AdditionalBounds -> AdditionalBound
-Rule 423   AdditionalBounds -> AdditionalBounds AdditionalBound
-Rule 424   AdditionalBound -> & InterfaceType
-Rule 425   TypeArguments -> < TypeArgumentList >
-Rule 426   TypeArgumentList -> TypeArgument
-Rule 427   TypeArgumentList -> TypeArgument comTypeArguments
-Rule 428   comTypeArguments -> , TypeArgument
-Rule 429   comTypeArguments -> comTypeArguments , TypeArgument
-Rule 430   TypeArgument -> ReferenceType
-Rule 431   TypeArgument -> Wildcard
-Rule 432   Wildcard -> ?
-Rule 433   Wildcard -> ? WildcardBounds
-Rule 434   Wildcard -> Annotations ?
-Rule 435   Wildcard -> Annotations ? WildcardBounds
-Rule 436   WildcardBounds -> extends ReferenceType
-Rule 437   WildcardBounds -> super Reference Type
-Rule 438   Annotation -> NormalAnnotation
-Rule 439   Annotation -> MarkerAnnotation
-Rule 440   Annotation -> SingleElementAnnotation
-Rule 441   NormalAnnotation -> @ Name ( )
-Rule 442   NormalAnnotation -> @ Name ( ElementValuePairList )
-Rule 443   ElementValuePairList -> ElementValuePair
-Rule 444   ElementValuePairList -> ElementValuePair comElementValuePairs
-Rule 445   comElementValuePairs -> , ElementValuePair
-Rule 446   comElementValuePairs -> comElementValuePairs , ElementValuePair
-Rule 447   ElementValuePair -> Identifier = ElementValue
-Rule 448   ElementValue -> ConditionalExpression
-Rule 449   ElementValue -> ElementValueArrayInitializer
-Rule 450   ElementValue -> Annotation
-Rule 451   ElementValueArrayInitializer -> <empty>
-Rule 452   ElementValueArrayInitializer -> ElementValueArrayInitializer ElementValueList
-Rule 453   ElementValueArrayInitializer -> ElementValueArrayInitializer ,
-Rule 454   ElementValueArrayInitializer -> ElementValueArrayInitializer ElementValueList ,
-Rule 455   ElementValueList -> ElementValue
-Rule 456   ElementValueList -> ElementValue comElementValues
-Rule 457   comElementValues -> , ElementValue
-Rule 458   comElementValues -> comElementValues , ElementValue
-Rule 459   MarkerAnnotation -> @ Name
-Rule 460   SingleElementAnnotation -> @ Name ( ElementValue )
-Rule 461   Block -> <empty>
-Rule 462   Block -> Block oneBlockStatements
-Rule 463   oneBlockStatements -> <empty>
-Rule 464   oneBlockStatements -> BlockStatements
-Rule 465   BlockStatements -> BockStatement
-Rule 466   BlockStatements -> BlockStatements BlockStatement
-Rule 467   BlockStatement -> LocalVariableDeclarationStatement
-Rule 468   BlockStatement -> ClassDeclaration
-Rule 469   BlockStatement -> Statement
-Rule 470   LocalVariableDeclarationStatement -> LocalVariableDeclaration ;
-Rule 471   LocalVariableDeclaration -> UnannType VariableDeclaratorList
-Rule 472   LocalVariableDeclaration -> VariableModifierStar UnannType VariableDeclaratorList
-Rule 473   VariableModifierStar -> VariableModifier
-Rule 474   VariableModifierStar -> VariableModifierStar VariableModifier
-Rule 475   Statement -> StatementWithoutTrailingSubstatement
-Rule 476   Statement -> LabeledStatement
-Rule 477   Statement -> IfThenStatement
-Rule 478   Statement -> IfThenElseStatement
-Rule 479   Statement -> WhileStatement
-Rule 480   Statement -> ForStatement
-Rule 481   StatementNoShortIf -> StatementWithoutTrailingSubstatement
-Rule 482   StatementNoShortIf -> LabeledStatementNoShortIf
-Rule 483   StatementNoShortIf -> IfThenElseStatementNoShortIf
-Rule 484   StatementNoShortIf -> WhileStatementNoShortIf
-Rule 485   StatementNoShortIf -> ForStatementNoShortIf
-Rule 486   StatementWithoutTrailingSubstatement -> Block
-Rule 487   StatementWithoutTrailingSubstatement -> EmptyStatement
-Rule 488   StatementWithoutTrailingSubstatement -> ExpressionStatement
-Rule 489   StatementWithoutTrailingSubstatement -> AssertStatement
-Rule 490   StatementWithoutTrailingSubstatement -> DoStatement
-Rule 491   StatementWithoutTrailingSubstatement -> BreakStatement
-Rule 492   StatementWithoutTrailingSubstatement -> ContinueStatement
-Rule 493   StatementWithoutTrailingSubstatement -> ReturnStatement
-Rule 494   StatementWithoutTrailingSubstatement -> SynchronizedStatement
-Rule 495   StatementWithoutTrailingSubstatement -> ThrowStatement
-Rule 496   StatementWithoutTrailingSubstatement -> TryStatement
-Rule 497   EmptyStatement -> ;
-Rule 498   LabeledStatement -> Identifier : Statement
-Rule 499   LabeledStatementNoShortIf -> Identifier : StatementNoShortIf
-Rule 500   ExpressionStatement -> StatementExpression ;
-Rule 501   StatementExpression -> Assignment
-Rule 502   StatementExpression -> PreIncrementExpression
-Rule 503   StatementExpression -> PreDecrementExpression
-Rule 504   StatementExpression -> PostIncrementExpression
-Rule 505   StatementExpression -> PostDecrementExpression
-Rule 506   StatementExpression -> MethodInvocation
-Rule 507   StatementExpression -> ClassInstanceCreationExpression
-Rule 508   IfThenStatement -> if ( Expression ) Statement
-Rule 509   IfThenElseStatement -> if ( Expression ) StatementNoShortIf else Statement
-Rule 510   IfThenElseStatementNoShortIf -> if ( Expression ) StatementNoShortIf else StatementNoShortIf
-Rule 511   AssertStatement -> assert Expression ;
-Rule 512   AssertStatement -> assert Expression : Expression ;
-Rule 513   EnumConstantName -> Identifier
-Rule 514   WhileStatement -> while ( Expression ) Statement
-Rule 515   WhileStaementNoShortIf -> while ( Expression ) StatementNoShortIf
-Rule 516   DoStatement -> do Statement while ( Expression ) ;
-Rule 517   ForStatement -> BasicForStatement
-Rule 518   ForStatement -> EnhancedForStatement
-Rule 519   ForStatementNoShortIf -> BasicForStatementNoShortIf
-Rule 520   ForStatementNoShortIf -> EnhancedForStatementNoShortIf
-Rule 521   BasicForStatement -> for ( ; ; ) Statement
-Rule 522   BasicForStatement -> for ( ForInit ; ; ) Statement
-Rule 523   BasicForStatement -> for ( ; Expression ; ) Statement
-Rule 524   BasicForStatement -> for ( ; ; ForUpdate ) Statement
-Rule 525   BasicForStatement -> for ( ForInit ; Expression ; ) Statement
-Rule 526   BasicForStatement -> for ( ; Expression ; ForUpdate ) Statement
-Rule 527   BasicForStatement -> for ( ForInit ; ; ForUpdate ) Statement
-Rule 528   BasicForStatement -> for ( ForInit ; Expression ; ForUpdate ) Statement
-Rule 529   BasicForStatementNoShortIf -> for ( ; ; ) StatementNoShortIf
-Rule 530   BasicForStatementNoShortIf -> for ( ForInit ; ; ) StatementNoShortIf
-Rule 531   BasicForStatementNoShortIf -> for ( ; Expression ; ) StatementNoShortIf
-Rule 532   BasicForStatementNoShortIf -> for ( ; ; ForUpdate ) StatementNoShortIf
-Rule 533   BasicForStatementNoShortIf -> for ( ForInit ; Expression ; ) StatementNoShortIf
-Rule 534   BasicForStatementNoShortIf -> for ( ; Expression ; ForUpdate ) StatementNoShortIf
-Rule 535   BasicForStatementNoShortIf -> for ( ForInit ; ; ForUpdate ) StatementNoShortIf
-Rule 536   BasicForStatementNoShortIf -> for ( ForInit ; Expression ; ForUpdate ) StatementNoShortIf
-Rule 537   ForInit -> StatementExpressionList
-Rule 538   ForInit -> LocalVariableDeclaration
-Rule 539   ForUpdate -> StatementExpressionList
-Rule 540   StatementExpressionList -> StatementExpression
-Rule 541   StatementExpressionList -> StatementExpression comStatementExpressionStar
-Rule 542   comStatementExpressionStar -> , StatementExpression
-Rule 543   comStatementExpressionStar -> comStatementExpressionStar , StatementExpression
-Rule 544   EnhancedForStatement -> for ( UnannType VariableDeclaratorId : Expression ) Statement
-Rule 545   EnhancedForStatement -> for ( VariableModifierStar UnannType VariableDeclaratorId : Expression ) Statement
-Rule 546   BreakStatement -> break ;
-Rule 547   BreakStatement -> break Identifier ;
-Rule 548   ContinueStatement -> continue ;
-Rule 549   ContinueStatement -> continue Identifier ;
-Rule 550   ReturnStatement -> return ;
-Rule 551   ReturnStatement -> return Expression ;
-Rule 552   ThrowStatement -> throw Expression ;
-Rule 553   SynchronizedStatement -> synchronized ( Expression ) Block
-Rule 554   TryStatement -> try Block Catches
-Rule 555   TryStatement -> try Block Finally
-Rule 556   TryStatement -> try Block Catches Finally
-Rule 557   TryStatement -> TryWithResourcesStatement
-Rule 558   Catches -> CatchClause
-Rule 559   Catches -> CatchClause CatchClauseStar
-Rule 560   CatchClauseStar -> CatchClause
-Rule 561   CatchClauseStar -> CatchClauseStar CatchClause
-Rule 562   CatchClause -> catch ( CatchFormalParameter ) Block
-Rule 563   CatchFormalParameter -> CatchType VariableDeclaratorId
-Rule 564   CatchFormalParameter -> VariableModifierStar CatchType VariableDeclaratorId
-Rule 565   CatchType -> UnannClassType
-Rule 566   CatchType -> UnannClassType stickClassTypeStar
-Rule 567   stickClassTypeStar -> | ClassType
-Rule 568   stickClassTypeStar -> stickClassTypeStar | ClassType
-Rule 569   Finally -> finally Block
-Rule 570   TryWithResourcesStatement -> try ResourceSpecification Block
-Rule 571   TryWithResourcesStatement -> try ResourceSpecification Block catches
-Rule 572   TryWithResourcesStatement -> try ResourceSpecification Block finally
-Rule 573   TryWithResourcesStatement -> try ResourceSpecification Block catches finally
-Rule 574   ResourceSpecification -> ( ResourceList )
-Rule 575   ResourceSpecification -> ( ResourceList ; )
-Rule 576   ResourceList -> Resource
-Rule 577   ResourceList -> Resource colResourceStar
-Rule 578   colResourceStar -> ; Resource
-Rule 579   colResourceStar -> colResourceStar ; Resource
-Rule 580   Resource -> UnannType VariableDeclaratorId = Expression
-Rule 581   Resource -> VariableModifierStar UnannType VariableDeclaratorId = Expression
+Rule 62    AnnoIdenStar -> . Annotations Identifier
+Rule 63    AnnoIdenStar -> . Identifier
+Rule 64    AnnoIdenStar -> AnnoIdenStar . Identifier
+Rule 65    AnnoIdenStar -> AnnoIdenStar . Annotations Identifier
+Rule 66    TypeArgumentsOrDiamond -> TypeArguments
+Rule 67    TypeArgumentsOrDiamond -> < >
+Rule 68    FieldAccess -> Primary . Identifier
+Rule 69    FieldAccess -> super . Identifier
+Rule 70    FieldAccess -> Name . super . Identifier
+Rule 71    ArrayAccess -> Name [ Expression ]
+Rule 72    ArrayAccess -> PrimaryNoNewArray [ Expression ]
+Rule 73    MethodInvocation -> Name ( ArgumentList )
+Rule 74    MethodInvocation -> Name ( )
+Rule 75    MethodInvocation -> Name . TypeArguments Identifier ( ArgumentList )
+Rule 76    MethodInvocation -> Name . Identifier ( ArgumentList )
+Rule 77    MethodInvocation -> Name . Identifier ( )
+Rule 78    MethodInvocation -> Primary . TypeArguments Identifier ( ArgumentList )
+Rule 79    MethodInvocation -> Primary . Identifier ( ArgumentList )
+Rule 80    MethodInvocation -> Primary . Identifier ( )
+Rule 81    MethodInvocation -> super . TypeArguments Identifier ( ArgumentList )
+Rule 82    MethodInvocation -> super . Identifier ( ArgumentList )
+Rule 83    MethodInvocation -> super . Identifier ( )
+Rule 84    MethodInvocation -> Name . super . TypeArguments Identifier ( ArgumentList )
+Rule 85    MethodInvocation -> Name . super . Identifier ( ArgumentList )
+Rule 86    MethodInvocation -> Name . super . Identifier ( )
+Rule 87    ArgumentList -> Expression
+Rule 88    ArgumentList -> ArgumentList , Expression
+Rule 89    MethodReference -> Name : : TypeArguments Identifier
+Rule 90    MethodReference -> ReferenceType : : TypeArguments Identifier
+Rule 91    MethodReference -> Primary : : TypeArguments Identifier
+Rule 92    MethodReference -> super : : TypeArguments Identifier
+Rule 93    MethodReference -> Name . super : : TypeArguments Identifier
+Rule 94    MethodReference -> ClassType : : TypeArguments new
+Rule 95    MethodReference -> Name : : Identifier
+Rule 96    MethodReference -> ReferenceType : : Identifier
+Rule 97    MethodReference -> Primary : : Identifier
+Rule 98    MethodReference -> super : : Identifier
+Rule 99    MethodReference -> Name . super : : Identifier
+Rule 100   MethodReference -> ClassType : : new
+Rule 101   MethodReference -> ArrayType : : new
+Rule 102   ArrayCreationExpression -> new PrimitiveType DimExprs Dims
+Rule 103   ArrayCreationExpression -> new ClassOrInterfaceType DimExprs Dims
+Rule 104   ArrayCreationExpression -> new PrimitiveType DimExprs
+Rule 105   ArrayCreationExpression -> new ClassOrInterfaceType DimExprs
+Rule 106   ArrayCreationExpression -> new PrimitiveType Dims ArrayInitializer
+Rule 107   ArrayCreationExpression -> new ClassOrInterfaceType Dims ArrayInitializer
+Rule 108   DimExprs -> DimExpr
+Rule 109   DimExprs -> DimExpr DimExprs
+Rule 110   DimExpr -> Annotations [ Expression ]
+Rule 111   Expression -> LambdaExpression
+Rule 112   Expression -> AssignmentExpression
+Rule 113   LambdaExpression -> LambdaParameters - > LambdaBody
+Rule 114   LambdaParameters -> Identifier
+Rule 115   LambdaParameters -> ( FormalParameterList )
+Rule 116   LambdaParameters -> ( )
+Rule 117   LambdaParameters -> ( InferredFormalParameterList )
+Rule 118   InferredFormalParameterList -> Identifier
+Rule 119   InferredFormalParameterList -> Identifier , InferredFormalParameterList
+Rule 120   LambdaBody -> Expression
+Rule 121   LambdaBody -> Block
+Rule 122   AssignmentExpression -> ConditionalExpression
+Rule 123   AssignmentExpression -> Assignment
+Rule 124   Assignment -> LeftHandSide AssignmentOperator Expression
+Rule 125   LeftHandSide -> Name
+Rule 126   LeftHandSide -> FieldAccess
+Rule 127   LeftHandSide -> ArrayAccess
+Rule 128   AssignmentOperator -> =
+Rule 129   AssignmentOperator -> * =
+Rule 130   AssignmentOperator -> / =
+Rule 131   AssignmentOperator -> % =
+Rule 132   AssignmentOperator -> + =
+Rule 133   AssignmentOperator -> - =
+Rule 134   AssignmentOperator -> < < =
+Rule 135   AssignmentOperator -> > > =
+Rule 136   AssignmentOperator -> > > > =
+Rule 137   AssignmentOperator -> & =
+Rule 138   AssignmentOperator -> ^ =
+Rule 139   AssignmentOperator -> | =
+Rule 140   ConditionalExpression -> ConditionalOrExpression
+Rule 141   ConditionalExpression -> ConditionalOrExpression ? Expression : ConditionalExpression
+Rule 142   ConditionalExpression -> ConditionalOrExpression ? Expression : LambdaExpression
+Rule 143   ConditionalOrExpression -> ConditionalAndExpression
+Rule 144   ConditionalOrExpression -> ConditionalAndExpression & & ConditionalOrExpression
+Rule 145   ConditionalAndExpression -> InclusiveOrExpression
+Rule 146   ConditionalAndExpression -> ConditionalAndExpression & & InclusiveOrExpression
+Rule 147   InclusiveOrExpression -> ExclusiveOrExpression
+Rule 148   InclusiveOrExpression -> InclusiveOrExpression | ExclusiveOrExpression
+Rule 149   ExclusiveOrExpression -> AndExpression
+Rule 150   ExclusiveOrExpression -> ExclusiveOrExpression ^ AndExpression
+Rule 151   AndExpression -> EqualityExpression
+Rule 152   AndExpression -> AndExpression & EqualityExpression
+Rule 153   EqualityExpression -> RelationalExpression
+Rule 154   EqualityExpression -> EqualityExpression = = RelationalExpression
+Rule 155   EqualityExpression -> EqualityExpression ! = RelationalExpression
+Rule 156   RelationalExpression -> ShiftExpression
+Rule 157   RelationalExpression -> RelationalExpression < ShiftExpression
+Rule 158   RelationalExpression -> RelationalExpression > ShiftExpression
+Rule 159   RelationalExpression -> RelationalExpression < = ShiftExpression
+Rule 160   RelationalExpression -> RelationalExpression > = ShiftExpression
+Rule 161   RelationalExpression -> RelationalExpression instanceof ReferenceType
+Rule 162   ShiftExpression -> AdditiveExpression
+Rule 163   ShiftExpression -> ShiftExpression < < AdditiveExpression
+Rule 164   ShiftExpression -> ShiftExpression > > AdditiveExpression
+Rule 165   ShiftExpression -> ShiftExpression > > > AdditiveExpression
+Rule 166   AdditiveExpression -> MultiplicativeExpression
+Rule 167   AdditiveExpression -> AdditiveExpression + MultiplicativeExpression
+Rule 168   AdditiveExpression -> AdditiveExpression - MultiplicativeExpression
+Rule 169   MultiplicativeExpression -> UnaryExpression
+Rule 170   MultiplicativeExpression -> MultiplicativeExpression * UnaryExpression
+Rule 171   MultiplicativeExpression -> MultiplicativeExpression / UnaryExpression
+Rule 172   MultiplicativeExpression -> MultiplicativeExpression % UnaryExpression
+Rule 173   UnaryExpression -> PreIncrementExpression
+Rule 174   UnaryExpression -> PreDecrementExpression
+Rule 175   UnaryExpression -> + UnaryExpression
+Rule 176   UnaryExpression -> - UnaryExpression
+Rule 177   UnaryExpression -> UnaryExpressionNotPlusMinus
+Rule 178   PreIncrementExpression -> + + UnaryExpression
+Rule 179   PreDecrementExpression -> - - UnaryExpression
+Rule 180   UnaryExpressionNotPlusMinus -> PostfixExpression
+Rule 181   UnaryExpressionNotPlusMinus -> ~ UnaryExpression
+Rule 182   UnaryExpressionNotPlusMinus -> ! UnaryExpression
+Rule 183   UnaryExpressionNotPlusMinus -> CastExpression
+Rule 184   PostfixExpression -> Primary
+Rule 185   PostfixExpression -> Name
+Rule 186   PostfixExpression -> PostIncrementExpression
+Rule 187   PostfixExpression -> PostDecrementExpression
+Rule 188   PostIncrementExpression -> PostfixExpression + +
+Rule 189   PostDecrementExpression -> PostfixExpression - -
+Rule 190   CastExpression -> ( PrimitiveType ) UnaryExpression
+Rule 191   CastExpression -> ( ReferenceType AdditionalBounds ) UnaryExpressionNotPlusMinus
+Rule 192   CastExpression -> ( ReferenceType AdditionalBounds ) LambdaExpression
+Rule 193   CastExpression -> ( ReferenceType ) UnaryExpressionNotPlusMinus
+Rule 194   CastExpression -> ( ReferenceType ) LambdaExpression
+Rule 195   ConstantExpression -> Expression
+Rule 196   Identifier -> IDENTIFIER
+Rule 197   Name -> SimpleName
+Rule 198   Name -> QualifiedName
+Rule 199   SimpleName -> Identifier
+Rule 200   QualifiedName -> Name . Identifier
+Rule 201   ClassDeclaration -> NormalClassDeclaration
+Rule 202   ClassDeclaration -> EnumDeclaration
+Rule 203   NormalClassDeclaration -> Modifiers class Identifier TypeParameters Superclass Superinterfaces ClassBody
+Rule 204   NormalClassDeclaration -> class Identifier TypeParameters Superclass Superinterfaces ClassBody
+Rule 205   NormalClassDeclaration -> Modifiers class Identifier TypeParameters Superclass ClassBody
+Rule 206   NormalClassDeclaration -> class Identifier TypeParameters Superclass ClassBody
+Rule 207   NormalClassDeclaration -> Modifiers class Identifier TypeParameters Superinterfaces ClassBody
+Rule 208   NormalClassDeclaration -> class Identifier TypeParameters Superinterfaces ClassBody
+Rule 209   NormalClassDeclaration -> Modifiers class Identifier TypeParameters ClassBody
+Rule 210   NormalClassDeclaration -> class Identifier TypeParameters ClassBody
+Rule 211   NormalClassDeclaration -> Modifiers class Identifier Superclass Superinterfaces ClassBody
+Rule 212   NormalClassDeclaration -> class Identifier Superclass Superinterfaces ClassBody
+Rule 213   NormalClassDeclaration -> Modifiers class Identifier Superclass ClassBody
+Rule 214   NormalClassDeclaration -> class Identifier Superclass ClassBody
+Rule 215   NormalClassDeclaration -> Modifiers class Identifier Superinterfaces ClassBody
+Rule 216   NormalClassDeclaration -> class Identifier Superinterfaces ClassBody
+Rule 217   NormalClassDeclaration -> Modifiers class Identifier ClassBody
+Rule 218   NormalClassDeclaration -> class Identifier ClassBody
+Rule 219   Modifiers -> Modifier
+Rule 220   Modifiers -> Modifiers Modifier
+Rule 221   Modifier -> public
+Rule 222   Modifier -> protected
+Rule 223   Modifier -> private
+Rule 224   Modifier -> static
+Rule 225   Modifier -> abstract
+Rule 226   Modifier -> final
+Rule 227   Modifier -> native
+Rule 228   Modifier -> synchronized
+Rule 229   Modifier -> transient
+Rule 230   Modifier -> volatile
+Rule 231   TypeParameters -> < TypeParameterList >
+Rule 232   TypeParameterList -> TypeParameter
+Rule 233   TypeParameterList -> TypeParameter CommaTypeParameterStar
+Rule 234   CommaTypeParameterStar -> , TypeParameter
+Rule 235   CommaTypeParameterStar -> CommaTypeParameterStar , TypeParameter
+Rule 236   Superclass -> extends ClassType
+Rule 237   Superinterfaces -> implements InterfaceTypeList
+Rule 238   InterfaceTypeList -> InterfaceType
+Rule 239   InterfaceTypeList -> InterfaceType CommaInterfaceTypeStar
+Rule 240   CommaInterfaceTypeStar -> , InterfaceType
+Rule 241   CommaInterfaceTypeStar -> CommaInterfaceTypeStar , InterfaceType
+Rule 242   ClassBody -> ClassBody ClassBodyDeclarationStar
+Rule 243   ClassBody -> <empty>
+Rule 244   ClassBodyDeclaration -> ClassMemberDeclaration
+Rule 245   ClassBodyDeclaration -> InstanceInitializer
+Rule 246   ClassBodyDeclaration -> StaticInitializer
+Rule 247   ClassBodyDeclaration -> ConstructorDeclaration
+Rule 248   ClassMemberDeclaration -> FieldDeclaration
+Rule 249   ClassMemberDeclaration -> MethodDeclaration
+Rule 250   ClassMemberDeclaration -> ClassDeclaration
+Rule 251   FieldDeclaration -> Modifiers UnannType VariableDeclaratorList
+Rule 252   FieldDeclaration -> UnannType VariableDeclaratorList
+Rule 253   VariableDeclaratorList -> VariableDeclarator CommaVariableDeclaratorStar
+Rule 254   VariableDeclaratorList -> VariableDeclarator
+Rule 255   CommaVariableDeclaratorStar -> , VariableDeclarator
+Rule 256   CommaVariableDeclaratorStar -> CommaVariableDeclaratorStar , VariableDeclarator
+Rule 257   VariableDeclarator -> VariableDeclaratorId = VariableInitializer
+Rule 258   VariableDeclarator -> VariableDeclaratorId
+Rule 259   VariableDeclaratorId -> Identifier Dims
+Rule 260   VariableDeclaratorId -> Identifier
+Rule 261   VariableInitializer -> Expression
+Rule 262   VariableInitializer -> ArrayInitializer
+Rule 263   UnannType -> UnannPrimitiveType
+Rule 264   UnannType -> UnannReferenceType
+Rule 265   UnannPrimitiveType -> NumericType
+Rule 266   UnannPrimitiveType -> boolean
+Rule 267   UnannReferenceType -> UnannClassOrInterfaceType
+Rule 268   UnannReferenceType -> UnannTypeVariable
+Rule 269   UnannReferenceType -> UnannArrayType
+Rule 270   UnannClassOrInterfaceType -> UnannClassType
+Rule 271   UnannClassOrInterfaceType -> UnannInterfaceType
+Rule 272   UnannClassType -> Identifier TypeArguments
+Rule 273   UnannClassType -> Identifier
+Rule 274   UnannClassType -> UnannClassOrInterfaceType . Annotations Identifier TypeArguments
+Rule 275   UnannClassType -> UnannClassOrInterfaceType . Annotations Identifier
+Rule 276   UnannClassType -> UnannClassOrInterfaceType . Identifier TypeArguments
+Rule 277   UnannClassType -> UnannClassOrInterfaceType . Identifier
+Rule 278   UnannInterfaceType -> UnannClassType
+Rule 279   UnannTypeVariable -> Identifier
+Rule 280   UnannArrayType -> UnannPrimitiveType Dims
+Rule 281   UnannArrayType -> UnannClassOrInterfaceType Dims
+Rule 282   UnannArrayType -> UnannTypeVariable Dims
+Rule 283   MethodDeclaration -> Modifiers MethodHeader MethodBody
+Rule 284   MethodHeader -> Result MethodDeclarator Throws
+Rule 285   MethodHeader -> Result MethodDeclarator
+Rule 286   MethodHeader -> TypeParameters Annotations Result MethodDeclarator Throws
+Rule 287   MethodHeader -> TypeParameters Annotations Result MethodDeclarator
+Rule 288   Result -> UnannType
+Rule 289   Result -> void
+Rule 290   MethodDeclarator -> Identifier ( FormalParameterList ) Dims
+Rule 291   MethodDeclarator -> Identifier ( ) Dims
+Rule 292   MethodDeclarator -> Identifier ( FormalParameterList )
+Rule 293   MethodDeclarator -> Identifier ( )
+Rule 294   FormalParameterList -> ReceiverParameter
+Rule 295   FormalParameterList -> FormalParameters , LastFormalParameter
+Rule 296   FormalParameterList -> LastFormalParameter
+Rule 297   FormalParameters -> FormalParameter CommaFormalParameters
+Rule 298   FormalParameters -> ReceiverParameter CommaFormalParameters
+Rule 299   FormalParameters -> FormalParameter
+Rule 300   FormalParameters -> ReceiverParameter
+Rule 301   CommaFormalParameters -> , FormalParameter
+Rule 302   CommaFormalParameters -> CommaFormalParameters , FormalParameter
+Rule 303   FormalParameter -> VariableModifierStar UnannType VariableDeclaratorId
+Rule 304   FormalParameter -> UnannType VariableDeclaratorId
+Rule 305   VariableModifier -> Annotation
+Rule 306   VariableModifier -> final
+Rule 307   LastFormalParameter -> VariableModifierStar UnannType Annotations . . . VariableDeclaratorId
+Rule 308   LastFormalParameter -> UnannType Annotations . . . VariableDeclaratorId
+Rule 309   LastFormalParameter -> VariableModifierStar UnannType . . . VariableDeclaratorId
+Rule 310   LastFormalParameter -> UnannType . . . VariableDeclaratorId
+Rule 311   LastFormalParameter -> FormalParameter
+Rule 312   ReceiverParameter -> Annotations UnannType Identifier . this
+Rule 313   ReceiverParameter -> Annotations UnannType this
+Rule 314   Throws -> throws ExceptionTypeList
+Rule 315   ExceptionTypeList -> ExceptionType CommaExceptionTypes
+Rule 316   ExceptionTypeList -> ExceptionType
+Rule 317   CommaExceptionTypes -> , ExceptionType
+Rule 318   CommaExceptionTypes -> CommaExceptionTypes , ExceptionType
+Rule 319   ExceptionType -> ClassType
+Rule 320   ExceptionType -> TypeVariable
+Rule 321   MethodBody -> Block
+Rule 322   MethodBody -> ;
+Rule 323   InstanceInitializer -> Block
+Rule 324   StaticInitializer -> static Block
+Rule 325   ConstructorDeclaration -> Modifiers ConstructorDeclarator Throws ConstructorBody
+Rule 326   ConstructorDeclaration -> ConstructorDeclarator Throws ConstructorBody
+Rule 327   ConstructorDeclaration -> ConstructorDeclarator ConstructorBody
+Rule 328   ConstructorDeclaration -> Modifiers ConstructorDeclarator ConstructorBody
+Rule 329   ConstructorDeclarator -> TypeParameters SimpleTypeName ( FormalParameterList )
+Rule 330   ConstructorDeclarator -> SimpleTypeName ( FormalParameterList )
+Rule 331   ConstructorDeclarator -> SimpleTypeName ( )
+Rule 332   ConstructorDeclarator -> TypeParameters SimpleTypeName ( )
+Rule 333   SimpleTypeName -> Identifier
+Rule 334   ConstructorBody -> ConstructorBody ExplicitConstructorInvocation BlockStatements
+Rule 335   ConstructorBody -> ConstructorBody BlockStatements
+Rule 336   ConstructorBody -> ConstructorBody ExplicitConstructorInvocation
+Rule 337   ConstructorBody -> <empty>
+Rule 338   ExplicitConstructorInvocation -> TypeArguments this ( ArgumentList ) ;
+Rule 339   ExplicitConstructorInvocation -> this ( ArgumentList ) ;
+Rule 340   ExplicitConstructorInvocation -> TypeArguments this ( ) ;
+Rule 341   ExplicitConstructorInvocation -> this ( ) ;
+Rule 342   ExplicitConstructorInvocation -> TypeArguments super ( ArgumentList ) ;
+Rule 343   ExplicitConstructorInvocation -> super ( ArgumentList ) ;
+Rule 344   ExplicitConstructorInvocation -> super ( ) ;
+Rule 345   ExplicitConstructorInvocation -> TypeArguments super ( ) ;
+Rule 346   ExplicitConstructorInvocation -> Name . TypeArguments super ( ArgumentList ) ;
+Rule 347   ExplicitConstructorInvocation -> Name . TypeArguments super ( ) ;
+Rule 348   ExplicitConstructorInvocation -> Name . super ( ArgumentList ) ;
+Rule 349   ExplicitConstructorInvocation -> Name . super ( ) ;
+Rule 350   ExplicitConstructorInvocation -> Primary . TypeArguments super ( ArgumentList ) ;
+Rule 351   ExplicitConstructorInvocation -> Primary . TypeArguments super ( ) ;
+Rule 352   ExplicitConstructorInvocation -> Primary . super ( ArgumentList ) ;
+Rule 353   ExplicitConstructorInvocation -> Primary . super ( ) ;
+Rule 354   EnumDeclaration -> Modifiers enum Identifier Superinterfaces EnumBody
+Rule 355   EnumDeclaration -> Modifiers enum Identifier EnumBody
+Rule 356   EnumDeclaration -> enum Identifier EnumBody
+Rule 357   EnumDeclaration -> enum Identifier Superinterfaces EnumBody
+Rule 358   EnumBody -> <empty>
+Rule 359   EnumBody -> EnumBody EnumConstantList , EnumBodyDeclarations
+Rule 360   EnumBody -> EnumBody EnumConstantList ,
+Rule 361   EnumBody -> EnumBody EnumConstantList EnumBodyDeclarations
+Rule 362   EnumBody -> EnumBody EnumConstantList
+Rule 363   EnumBody -> EnumBody , EnumBodyDeclarations
+Rule 364   EnumBody -> EnumBody ,
+Rule 365   EnumBody -> EnumBody EnumBodyDeclarations
+Rule 366   EnumConstantList -> EnumConstant CommaEnumConstants
+Rule 367   EnumConstantList -> EnumConstant
+Rule 368   CommaEnumConstants -> , EnumConstant
+Rule 369   CommaEnumConstants -> CommaEnumConstants , EnumConstant
+Rule 370   EnumConstant -> EnumConstantModifiers Identifier ( ArgumentList ) ClassBody
+Rule 371   EnumConstant -> EnumConstantModifiers Identifier ( ) ClassBody
+Rule 372   EnumConstant -> EnumConstantModifiers Identifier ClassBody
+Rule 373   EnumConstant -> EnumConstantModifiers Identifier ( ArgumentList )
+Rule 374   EnumConstant -> EnumConstantModifiers Identifier ( )
+Rule 375   EnumConstant -> EnumConstantModifiers Identifier
+Rule 376   EnumConstant -> Identifier ( ArgumentList ) ClassBody
+Rule 377   EnumConstant -> Identifier ( ) ClassBody
+Rule 378   EnumConstant -> Identifier ClassBody
+Rule 379   EnumConstant -> Identifier
+Rule 380   EnumConstant -> Identifier ( ArgumentList )
+Rule 381   EnumConstant -> Identifier ( )
+Rule 382   EnumConstantModifier -> Annotation
+Rule 383   EnumBodyDeclarations -> ; ClassBodyDeclarationStar
+Rule 384   EnumBodyDeclarations -> ;
+Rule 385   ClassBodyDeclarationStar -> ClassBodyDeclaration
+Rule 386   ClassBodyDeclarationStar -> ClassBodyDeclarationStar ClassBodyDeclaration
+Rule 387   EnumConstantModifiers -> EnumConstantModifier
+Rule 388   EnumConstantModifiers -> EnumConstantModifiers EnumConstantModifier
+Rule 389   Type -> PrimitiveType
+Rule 390   Type -> ReferenceType
+Rule 391   PrimitiveType -> NumericType
+Rule 392   PrimitiveType -> Annotations NumericType
+Rule 393   PrimitiveType -> boolean
+Rule 394   PrimitiveType -> Annotations boolean
+Rule 395   Annotations -> Annotation
+Rule 396   Annotations -> Annotations Annotation
+Rule 397   NumericType -> IntegralType
+Rule 398   NumericType -> FloatingPointType
+Rule 399   IntegralType -> byte
+Rule 400   IntegralType -> short
+Rule 401   IntegralType -> int
+Rule 402   IntegralType -> long
+Rule 403   IntegralType -> char
+Rule 404   FloatingPointType -> float
+Rule 405   FloatingPointType -> double
+Rule 406   ReferenceType -> ClassoOrInterfaceType
+Rule 407   ReferenceType -> TypeVariable
+Rule 408   ReferenceType -> ArrayType
+Rule 409   ClassOrInterfaceType -> Name
+Rule 410   ClassType -> ClassOrInterfaceType
+Rule 411   InterfaceType -> ClassOrInterfaceType
+Rule 412   ArrayType -> PrimitiveType [ ]
+Rule 413   ArrayType -> Name [ ]
+Rule 414   ArrayType -> ArrayType [ ]
+Rule 415   Dims -> [ ]
+Rule 416   Dims -> [ ] sqAnnotations
+Rule 417   Dims -> Annotations [ ]
+Rule 418   Dims -> Annotations [ ] sqAnnotations
+Rule 419   sqAnnotations -> [ ]
+Rule 420   sqAnnotations -> sqAnnotations [ ]
+Rule 421   sqAnnotations -> sqAnnotations Annotations [ ]
+Rule 422   TypeParameter -> Identifier
+Rule 423   TypeParameter -> Identifier TypeBound
+Rule 424   TypeParameter -> TypeParameterModifiers Identifier
+Rule 425   TypeParameter -> TypeParameterModifiers Identifier TypeBound
+Rule 426   TypeParameterModifiers -> TypeParameterModifier
+Rule 427   TypeParameterModifiers -> TypeParameterModifiers TypeParameterModifier
+Rule 428   TypeParameterModifier -> Annotation
+Rule 429   TypeBound -> extends TypeVariable
+Rule 430   TypeBound -> extends ClassOrInterfaceType
+Rule 431   TypeBound -> extends ClassOrInterfaceType AdditionalBounds
+Rule 432   AdditionalBounds -> AdditionalBound
+Rule 433   AdditionalBounds -> AdditionalBounds AdditionalBound
+Rule 434   AdditionalBound -> & InterfaceType
+Rule 435   TypeArguments -> < TypeArgumentList >
+Rule 436   TypeArgumentList -> TypeArgument
+Rule 437   TypeArgumentList -> TypeArgument comTypeArguments
+Rule 438   comTypeArguments -> , TypeArgument
+Rule 439   comTypeArguments -> comTypeArguments , TypeArgument
+Rule 440   TypeArgument -> ReferenceType
+Rule 441   TypeArgument -> Wildcard
+Rule 442   Wildcard -> ?
+Rule 443   Wildcard -> ? WildcardBounds
+Rule 444   Wildcard -> Annotations ?
+Rule 445   Wildcard -> Annotations ? WildcardBounds
+Rule 446   WildcardBounds -> extends ReferenceType
+Rule 447   WildcardBounds -> super Reference Type
+Rule 448   Annotation -> NormalAnnotation
+Rule 449   Annotation -> MarkerAnnotation
+Rule 450   Annotation -> SingleElementAnnotation
+Rule 451   NormalAnnotation -> @ Name ( )
+Rule 452   NormalAnnotation -> @ Name ( ElementValuePairList )
+Rule 453   ElementValuePairList -> ElementValuePair
+Rule 454   ElementValuePairList -> ElementValuePair comElementValuePairs
+Rule 455   comElementValuePairs -> , ElementValuePair
+Rule 456   comElementValuePairs -> comElementValuePairs , ElementValuePair
+Rule 457   ElementValuePair -> Identifier = ElementValue
+Rule 458   ElementValue -> ConditionalExpression
+Rule 459   ElementValue -> ElementValueArrayInitializer
+Rule 460   ElementValue -> Annotation
+Rule 461   ElementValueArrayInitializer -> <empty>
+Rule 462   ElementValueArrayInitializer -> ElementValueArrayInitializer ElementValueList
+Rule 463   ElementValueArrayInitializer -> ElementValueArrayInitializer ,
+Rule 464   ElementValueArrayInitializer -> ElementValueArrayInitializer ElementValueList ,
+Rule 465   ElementValueList -> ElementValue
+Rule 466   ElementValueList -> ElementValue comElementValues
+Rule 467   comElementValues -> , ElementValue
+Rule 468   comElementValues -> comElementValues , ElementValue
+Rule 469   MarkerAnnotation -> @ Name
+Rule 470   SingleElementAnnotation -> @ Name ( ElementValue )
+Rule 471   Block -> <empty>
+Rule 472   Block -> Block oneBlockStatements
+Rule 473   oneBlockStatements -> <empty>
+Rule 474   oneBlockStatements -> BlockStatements
+Rule 475   BlockStatements -> BlockStatement
+Rule 476   BlockStatements -> BlockStatements BlockStatement
+Rule 477   BlockStatement -> LocalVariableDeclarationStatement
+Rule 478   BlockStatement -> ClassDeclaration
+Rule 479   BlockStatement -> Statement
+Rule 480   LocalVariableDeclarationStatement -> LocalVariableDeclaration ;
+Rule 481   LocalVariableDeclaration -> UnannType VariableDeclaratorList
+Rule 482   LocalVariableDeclaration -> VariableModifierStar UnannType VariableDeclaratorList
+Rule 483   VariableModifierStar -> VariableModifier
+Rule 484   VariableModifierStar -> VariableModifierStar VariableModifier
+Rule 485   Statement -> StatementWithoutTrailingSubstatement
+Rule 486   Statement -> LabeledStatement
+Rule 487   Statement -> IfThenStatement
+Rule 488   Statement -> IfThenElseStatement
+Rule 489   Statement -> WhileStatement
+Rule 490   Statement -> ForStatement
+Rule 491   StatementNoShortIf -> StatementWithoutTrailingSubstatement
+Rule 492   StatementNoShortIf -> LabeledStatementNoShortIf
+Rule 493   StatementNoShortIf -> IfThenElseStatementNoShortIf
+Rule 494   StatementNoShortIf -> WhileStatementNoShortIf
+Rule 495   StatementNoShortIf -> ForStatementNoShortIf
+Rule 496   StatementWithoutTrailingSubstatement -> Block
+Rule 497   StatementWithoutTrailingSubstatement -> EmptyStatement
+Rule 498   StatementWithoutTrailingSubstatement -> ExpressionStatement
+Rule 499   StatementWithoutTrailingSubstatement -> AssertStatement
+Rule 500   StatementWithoutTrailingSubstatement -> DoStatement
+Rule 501   StatementWithoutTrailingSubstatement -> BreakStatement
+Rule 502   StatementWithoutTrailingSubstatement -> ContinueStatement
+Rule 503   StatementWithoutTrailingSubstatement -> ReturnStatement
+Rule 504   StatementWithoutTrailingSubstatement -> SynchronizedStatement
+Rule 505   StatementWithoutTrailingSubstatement -> ThrowStatement
+Rule 506   StatementWithoutTrailingSubstatement -> TryStatement
+Rule 507   EmptyStatement -> ;
+Rule 508   LabeledStatement -> Identifier : Statement
+Rule 509   LabeledStatementNoShortIf -> Identifier : StatementNoShortIf
+Rule 510   ExpressionStatement -> StatementExpression ;
+Rule 511   StatementExpression -> Assignment
+Rule 512   StatementExpression -> PreIncrementExpression
+Rule 513   StatementExpression -> PreDecrementExpression
+Rule 514   StatementExpression -> PostIncrementExpression
+Rule 515   StatementExpression -> PostDecrementExpression
+Rule 516   StatementExpression -> MethodInvocation
+Rule 517   StatementExpression -> ClassInstanceCreationExpression
+Rule 518   IfThenStatement -> if ( Expression ) Statement
+Rule 519   IfThenElseStatement -> if ( Expression ) StatementNoShortIf else Statement
+Rule 520   IfThenElseStatementNoShortIf -> if ( Expression ) StatementNoShortIf else StatementNoShortIf
+Rule 521   AssertStatement -> assert Expression ;
+Rule 522   AssertStatement -> assert Expression : Expression ;
+Rule 523   EnumConstantName -> Identifier
+Rule 524   WhileStatement -> while ( Expression ) Statement
+Rule 525   WhileStaementNoShortIf -> while ( Expression ) StatementNoShortIf
+Rule 526   DoStatement -> do Statement while ( Expression ) ;
+Rule 527   ForStatement -> BasicForStatement
+Rule 528   ForStatement -> EnhancedForStatement
+Rule 529   ForStatementNoShortIf -> BasicForStatementNoShortIf
+Rule 530   ForStatementNoShortIf -> EnhancedForStatementNoShortIf
+Rule 531   BasicForStatement -> for ( ; ; ) Statement
+Rule 532   BasicForStatement -> for ( ForInit ; ; ) Statement
+Rule 533   BasicForStatement -> for ( ; Expression ; ) Statement
+Rule 534   BasicForStatement -> for ( ; ; ForUpdate ) Statement
+Rule 535   BasicForStatement -> for ( ForInit ; Expression ; ) Statement
+Rule 536   BasicForStatement -> for ( ; Expression ; ForUpdate ) Statement
+Rule 537   BasicForStatement -> for ( ForInit ; ; ForUpdate ) Statement
+Rule 538   BasicForStatement -> for ( ForInit ; Expression ; ForUpdate ) Statement
+Rule 539   BasicForStatementNoShortIf -> for ( ; ; ) StatementNoShortIf
+Rule 540   BasicForStatementNoShortIf -> for ( ForInit ; ; ) StatementNoShortIf
+Rule 541   BasicForStatementNoShortIf -> for ( ; Expression ; ) StatementNoShortIf
+Rule 542   BasicForStatementNoShortIf -> for ( ; ; ForUpdate ) StatementNoShortIf
+Rule 543   BasicForStatementNoShortIf -> for ( ForInit ; Expression ; ) StatementNoShortIf
+Rule 544   BasicForStatementNoShortIf -> for ( ; Expression ; ForUpdate ) StatementNoShortIf
+Rule 545   BasicForStatementNoShortIf -> for ( ForInit ; ; ForUpdate ) StatementNoShortIf
+Rule 546   BasicForStatementNoShortIf -> for ( ForInit ; Expression ; ForUpdate ) StatementNoShortIf
+Rule 547   ForInit -> StatementExpressionList
+Rule 548   ForInit -> LocalVariableDeclaration
+Rule 549   ForUpdate -> StatementExpressionList
+Rule 550   StatementExpressionList -> StatementExpression
+Rule 551   StatementExpressionList -> StatementExpression comStatementExpressionStar
+Rule 552   comStatementExpressionStar -> , StatementExpression
+Rule 553   comStatementExpressionStar -> comStatementExpressionStar , StatementExpression
+Rule 554   EnhancedForStatement -> for ( UnannType VariableDeclaratorId : Expression ) Statement
+Rule 555   EnhancedForStatement -> for ( VariableModifierStar UnannType VariableDeclaratorId : Expression ) Statement
+Rule 556   BreakStatement -> break ;
+Rule 557   BreakStatement -> break Identifier ;
+Rule 558   ContinueStatement -> continue ;
+Rule 559   ContinueStatement -> continue Identifier ;
+Rule 560   ReturnStatement -> return ;
+Rule 561   ReturnStatement -> return Expression ;
+Rule 562   ThrowStatement -> throw Expression ;
+Rule 563   SynchronizedStatement -> synchronized ( Expression ) Block
+Rule 564   TryStatement -> try Block Catches
+Rule 565   TryStatement -> try Block Finally
+Rule 566   TryStatement -> try Block Catches Finally
+Rule 567   TryStatement -> TryWithResourcesStatement
+Rule 568   Catches -> CatchClause
+Rule 569   Catches -> CatchClause CatchClauseStar
+Rule 570   CatchClauseStar -> CatchClause
+Rule 571   CatchClauseStar -> CatchClauseStar CatchClause
+Rule 572   CatchClause -> catch ( CatchFormalParameter ) Block
+Rule 573   CatchFormalParameter -> CatchType VariableDeclaratorId
+Rule 574   CatchFormalParameter -> VariableModifierStar CatchType VariableDeclaratorId
+Rule 575   CatchType -> UnannClassType
+Rule 576   CatchType -> UnannClassType stickClassTypeStar
+Rule 577   stickClassTypeStar -> | ClassType
+Rule 578   stickClassTypeStar -> stickClassTypeStar | ClassType
+Rule 579   Finally -> finally Block
+Rule 580   TryWithResourcesStatement -> try ResourceSpecification Block
+Rule 581   TryWithResourcesStatement -> try ResourceSpecification Block catches
+Rule 582   TryWithResourcesStatement -> try ResourceSpecification Block finally
+Rule 583   TryWithResourcesStatement -> try ResourceSpecification Block catches finally
+Rule 584   ResourceSpecification -> ( ResourceList )
+Rule 585   ResourceSpecification -> ( ResourceList ; )
+Rule 586   ResourceList -> Resource
+Rule 587   ResourceList -> Resource colResourceStar
+Rule 588   colResourceStar -> ; Resource
+Rule 589   colResourceStar -> colResourceStar ; Resource
+Rule 590   Resource -> UnannType VariableDeclaratorId = Expression
+Rule 591   Resource -> VariableModifierStar UnannType VariableDeclaratorId = Expression
 
 Terminals, with rules where they appear
 
-!                    : 151 178
-%                    : 127 168
-&                    : 133 140 140 142 142 148 424
-(                    : 33 51 52 53 69 70 71 72 73 74 75 76 77 78 79 80 81 82 111 112 113 186 187 188 285 286 287 288 319 320 321 322 328 329 330 331 332 333 334 335 336 337 338 339 340 341 342 343 360 361 363 364 366 367 370 371 441 442 460 508 509 510 514 515 516 521 522 523 524 525 526 527 528 529 530 531 532 533 534 535 536 544 545 553 562 574 575
-)                    : 33 51 52 53 69 70 71 72 73 74 75 76 77 78 79 80 81 82 111 112 113 186 187 188 285 286 287 288 319 320 321 322 328 329 330 331 332 333 334 335 336 337 338 339 340 341 342 343 360 361 363 364 366 367 370 371 441 442 460 508 509 510 514 515 516 521 522 523 524 525 526 527 528 529 530 531 532 533 534 535 536 544 545 553 562 574 575
-*                    : 17 125 166
-+                    : 128 163 171 174 174 184 184
-,                    : 19 21 25 26 84 115 228 229 234 235 250 251 290 296 297 307 308 349 350 353 354 358 359 428 429 445 446 453 454 457 458 542 543
--                    : 109 129 164 172 175 175 185 185
-.                    : 17 32 39 40 41 42 43 44 45 49 50 64 65 66 66 71 72 73 74 75 76 77 78 79 80 80 81 81 82 82 89 95 194 269 270 271 272 300 300 300 302 336 337 338 339 340 341 342 343
-/                    : 126 167
-:                    : 85 85 86 86 87 87 88 88 89 89 90 90 91 91 92 92 93 93 94 94 95 95 96 96 97 97 137 138 498 499 512 544 545
-;                    : 9 16 17 312 328 329 330 331 332 333 334 335 336 337 338 339 340 341 342 343 373 374 470 497 500 511 512 516 521 521 522 522 523 523 524 524 525 525 526 526 527 527 528 528 529 529 530 530 531 531 532 532 533 533 534 534 535 535 536 536 546 547 548 549 550 551 552 575 578 579
-<                    : 63 130 130 153 155 159 159 225 425
-=                    : 124 125 126 127 128 129 130 131 132 133 134 135 150 150 151 155 156 252 447 580 581
->                    : 63 109 131 131 132 132 132 154 156 160 160 161 161 161 225 425
-?                    : 137 138 432 433 434 435
-@                    : 441 442 459 460
+!                    : 155 182
+%                    : 131 172
+&                    : 137 144 144 146 146 152 434
+(                    : 33 51 52 53 73 74 75 76 77 78 79 80 81 82 83 84 85 86 115 116 117 190 191 192 193 194 290 291 292 293 329 330 331 332 338 339 340 341 342 343 344 345 346 347 348 349 350 351 352 353 370 371 373 374 376 377 380 381 451 452 470 518 519 520 524 525 526 531 532 533 534 535 536 537 538 539 540 541 542 543 544 545 546 554 555 563 572 584 585
+)                    : 33 51 52 53 73 74 75 76 77 78 79 80 81 82 83 84 85 86 115 116 117 190 191 192 193 194 290 291 292 293 329 330 331 332 338 339 340 341 342 343 344 345 346 347 348 349 350 351 352 353 370 371 373 374 376 377 380 381 451 452 470 518 519 520 524 525 526 531 532 533 534 535 536 537 538 539 540 541 542 543 544 545 546 554 555 563 572 584 585
+*                    : 17 129 170
++                    : 132 167 175 178 178 188 188
+,                    : 19 21 25 26 88 119 234 235 240 241 255 256 295 301 302 317 318 359 360 363 364 368 369 438 439 455 456 463 464 467 468 552 553
+-                    : 113 133 168 176 179 179 189 189
+.                    : 17 32 39 40 41 42 43 44 45 49 50 62 63 64 65 68 69 70 70 75 76 77 78 79 80 81 82 83 84 84 85 85 86 86 93 99 200 274 275 276 277 307 307 307 308 308 308 309 309 309 310 310 310 312 346 347 348 349 350 351 352 353
+/                    : 130 171
+:                    : 89 89 90 90 91 91 92 92 93 93 94 94 95 95 96 96 97 97 98 98 99 99 100 100 101 101 141 142 508 509 522 554 555
+;                    : 9 16 17 322 338 339 340 341 342 343 344 345 346 347 348 349 350 351 352 353 383 384 480 507 510 521 522 526 531 531 532 532 533 533 534 534 535 535 536 536 537 537 538 538 539 539 540 540 541 541 542 542 543 543 544 544 545 545 546 546 556 557 558 559 560 561 562 585 588 589
+<                    : 67 134 134 157 159 163 163 231 435
+=                    : 128 129 130 131 132 133 134 135 136 137 138 139 154 154 155 159 160 257 457 590 591
+>                    : 67 113 135 135 136 136 136 158 160 164 164 165 165 165 231 435
+?                    : 141 142 442 443 444 445
+@                    : 451 452 469 470
 Comment              : 
-IDENTIFIER           : 190
+IDENTIFIER           : 196
 Keyword              : 
 Literal              : 29
 Operator             : 
 Seperator            : 
-[                    : 46 47 67 68 106 402 403 404 405 406 407 408 409 410 411
-]                    : 46 47 67 68 106 402 403 404 405 406 407 408 409 410 411
-^                    : 134 146
-abstract             : 219
-assert               : 511 512
+[                    : 46 47 71 72 110 412 413 414 415 416 417 418 419 420 421
+]                    : 46 47 71 72 110 412 413 414 415 416 417 418 419 420 421
+^                    : 138 150
+abstract             : 225
+assert               : 521 522
 based                : 
-boolean              : 41 44 261 383 384
-break                : 546 547
-byte                 : 389
+boolean              : 41 44 266 393 394
+break                : 556 557
+byte                 : 399
 case                 : 
-catch                : 562
-char                 : 393
-class                : 39 40 41 42 43 44 45 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212
+catch                : 572
+char                 : 403
+class                : 39 40 41 42 43 44 45 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218
 const                : 
-continue             : 548 549
+continue             : 558 559
 default              : 
-do                   : 516
-double               : 395
-else                 : 509 510
-enum                 : 344 345 346 347
+do                   : 526
+double               : 405
+else                 : 519 520
+enum                 : 354 355 356 357
 err                  : 
 error                : 
-extends              : 230 419 420 421 436
+extends              : 236 429 430 431 446
 false                : 
-final                : 220
-finally              : 569 572 573
-float                : 394
-for                  : 521 522 523 524 525 526 527 528 529 530 531 532 533 534 535 536 544 545
+final                : 226 306
+finally              : 579 582 583
+float                : 404
+for                  : 531 532 533 534 535 536 537 538 539 540 541 542 543 544 545 546 554 555
 goto                 : 
-if                   : 508 509 510
-implements           : 231
+if                   : 518 519 520
+implements           : 237
 import               : 16 17
-instanceof           : 157
-int                  : 391
+instanceof           : 161
+int                  : 401
 interface            : 
-long                 : 392
-native               : 221
-new                  : 51 52 53 90 96 97 98 99 100 101 102 103
+long                 : 402
+native               : 227
+new                  : 51 52 53 94 100 101 102 103 104 105 106 107
 null                 : 
 package              : 9
-private              : 217
-protected            : 216
-public               : 215
-return               : 550 551
-short                : 390
-static               : 218 314
+private              : 223
+protected            : 222
+public               : 221
+return               : 560 561
+short                : 400
+static               : 224 324
 strictfp             : 
-super                : 65 66 77 78 79 80 81 82 88 89 94 95 332 333 334 335 336 337 338 339 340 341 342 343 437
+super                : 69 70 81 82 83 84 85 86 92 93 98 99 342 343 344 345 346 347 348 349 350 351 352 353 447
 switch               : 
-synchronized         : 222 553
-this                 : 31 32 302 303 328 329 330 331
-throw                : 552
-throws               : 304
-transient            : 223
+synchronized         : 228 563
+this                 : 31 32 312 313 338 339 340 341
+throw                : 562
+throws               : 314
+transient            : 229
 true                 : 
-try                  : 554 555 556 570 571 572 573
-void                 : 45 284
-volatile             : 224
-while                : 514 515 516
-|                    : 135 144 567 568
-~                    : 177
+try                  : 564 565 566 580 581 582 583
+void                 : 45 289
+volatile             : 230
+while                : 524 525 526
+|                    : 139 148 577 578
+~                    : 181
 
 Nonterminals, with rules where they appear
 
-AdditionalBound      : 422 423
-AdditionalBoundS     : 187 188
-AdditionalBounds     : 421 423
-AdditiveExpression   : 158 159 160 161 163 164
-AndExpression        : 145 146 148
-AnnoIdenStar         : 54 55 57 58
-Annotation           : 372 385 386 418 450
-Annotations          : 54 56 57 59 106 269 270 281 282 300 302 303 382 384 386 407 408 411 434 435
-ArgumentList         : 51 52 69 71 72 74 75 77 78 80 81 84 328 329 332 333 336 338 340 342 360 363 366 370
-ArrayAccess          : 36 123
+AdditionalBound      : 432 433
+AdditionalBounds     : 191 192 431 433
+AdditiveExpression   : 162 163 164 165 167 168
+AndExpression        : 149 150 152
+AnnoIdenStar         : 54 55 57 58 64 65
+Annotation           : 305 382 395 396 428 460
+Annotations          : 54 56 57 59 62 65 110 274 275 286 287 307 308 312 313 392 394 396 417 418 421 444 445
+ArgumentList         : 51 52 73 75 76 78 79 81 82 84 85 88 338 339 342 343 346 348 350 352 370 373 376 380
+ArrayAccess          : 36 127
 ArrayCreationExpression : 28
-ArrayInitializer     : 19 20 21 102 103 257
-ArrayType            : 97 398 404
-AssertStatement      : 489
-Assignment           : 119 501
-AssignmentExpression : 108
-AssignmentOperator   : 120
-BasicForStatement    : 517
-BasicForStatementNoShortIf : 519
-Block                : 117 311 313 314 462 486 553 554 555 556 562 569 570 571 572 573
-BlockStatement       : 466
-BlockStatements      : 324 325 464 466
-BockStatement        : 465
-BreakStatement       : 491
-CastExpression       : 179
-CatchClause          : 558 559 560 561
-CatchClauseStar      : 559 561
-CatchFormalParameter : 562
-CatchType            : 563 564
-Catches              : 554 556
-ClassBody            : 51 52 53 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 236 360 361 362 366 367 368
-ClassBodyDeclaration : 375 376
-ClassBodyDeclarationStar : 236 373 376
-ClassBodyeclaration  : 238
-ClassBodyeclarationStar : 238
-ClassDeclaration     : 18 245 468
-ClassInstanceCreationExpression : 34 507
+ArrayInitializer     : 19 20 21 106 107 262
+ArrayType            : 101 408 414
+AssertStatement      : 499
+Assignment           : 123 511
+AssignmentExpression : 112
+AssignmentOperator   : 124
+BasicForStatement    : 527
+BasicForStatementNoShortIf : 529
+Block                : 121 321 323 324 472 496 563 564 565 566 572 579 580 581 582 583
+BlockStatement       : 475 476
+BlockStatements      : 334 335 474 476
+BreakStatement       : 501
+CastExpression       : 183
+CatchClause          : 568 569 570 571
+CatchClauseStar      : 569 571
+CatchFormalParameter : 572
+CatchType            : 573 574
+Catches              : 564 566
+ClassBody            : 51 52 53 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 242 370 371 372 376 377 378
+ClassBodyDeclaration : 385 386
+ClassBodyDeclarationStar : 242 383 386
+ClassDeclaration     : 18 250 478
+ClassInstanceCreationExpression : 34 517
 ClassLiteral         : 30
-ClassMemberDeclaration : 239
-ClassOrInterfaceType : 99 101 103 400 401 420 421
+ClassMemberDeclaration : 244
+ClassOrInterfaceType : 103 105 107 410 411 430 431
 ClassOrInterfaceTypeToInstantiate : 51 52 53
-ClassType            : 90 96 230 309 567 568
-ClassoOrInterfaceType : 396
-CommaEnumConstants   : 356 359
-CommaExceptionTypes  : 305 308
-CommaFormalParameters : 292 293 297
-CommaInterfaceTypeStar : 233 235
-CommaTypeParameterStar : 227 229
-CommaVariableDeclaratorStar : 248 251
+ClassType            : 94 100 236 319 577 578
+ClassoOrInterfaceType : 406
+CommaEnumConstants   : 366 369
+CommaExceptionTypes  : 315 318
+CommaFormalParameters : 297 298 302
+CommaInterfaceTypeStar : 239 241
+CommaTypeParameterStar : 233 235
+CommaVariableDeclaratorStar : 253 256
 CommaVariableInitializers : 24 26
 CompilationUnit      : 0
-ConditionalAndExpression : 139 140 142
-ConditionalExpression : 118 137 448
-ConditionalOrExpression : 136 137 138 140
+ConditionalAndExpression : 143 144 146
+ConditionalExpression : 122 141 458
+ConditionalOrExpression : 140 141 142 144
 ConstantExpression   : 
-ConstructorBody      : 315 316 317 318 324 325 326
-ConstructorDeclaration : 242
-ConstructorDeclarator : 315 316 317 318
-ContinueStatement    : 492
-DimExpr              : 104 105
-DimExprs             : 98 99 100 101 105
-Dims                 : 98 99 102 103 254 275 276 277 285 286
-DoStatement          : 490
-ElementValue         : 447 455 456 457 458 460
-ElementValueArrayInitializer : 449 452 453 454
-ElementValueList     : 452 454
-ElementValuePair     : 443 444 445 446
-ElementValuePairList : 442
-EmptyStatement       : 487
-EnhancedForStatement : 518
-EnhancedForStatementNoShortIf : 520
-EnumBody             : 344 345 346 347 349 350 351 352 353 354 355
-EnumBodyDeclarations : 349 351 353 355
-EnumConstant         : 356 357 358 359
-EnumConstantList     : 349 350 351 352
-EnumConstantModifier : 377 378
-EnumConstantModifiers : 360 361 362 363 364 365 378
+ConstructorBody      : 325 326 327 328 334 335 336
+ConstructorDeclaration : 247
+ConstructorDeclarator : 325 326 327 328
+ContinueStatement    : 502
+DimExpr              : 108 109
+DimExprs             : 102 103 104 105 109
+Dims                 : 102 103 106 107 259 280 281 282 290 291
+DoStatement          : 500
+ElementValue         : 457 465 466 467 468 470
+ElementValueArrayInitializer : 459 462 463 464
+ElementValueList     : 462 464
+ElementValuePair     : 453 454 455 456
+ElementValuePairList : 452
+EmptyStatement       : 497
+EnhancedForStatement : 528
+EnhancedForStatementNoShortIf : 530
+EnumBody             : 354 355 356 357 359 360 361 362 363 364 365
+EnumBodyDeclarations : 359 361 363 365
+EnumConstant         : 366 367 368 369
+EnumConstantList     : 359 360 361 362
+EnumConstantModifier : 387 388
+EnumConstantModifiers : 370 371 372 373 374 375 388
 EnumConstantName     : 
-EnumDeclaration      : 196
-EqualityExpression   : 147 148 150 151
-ExceptionType        : 305 306 307 308
-ExceptionTypeList    : 304
-ExclusiveOrExpression : 143 144 146
-ExplicitConstructorInvocation : 324 326
-Expression           : 33 67 68 83 84 106 116 120 137 138 189 256 508 509 510 511 512 512 514 515 516 523 525 526 528 531 533 534 536 544 545 551 552 553 580 581
-ExpressionStatement  : 488
-FieldAccess          : 35 122
-FieldDeclaration     : 243
-Finally              : 555 556
-FloatingPointType    : 388
-ForInit              : 522 525 527 528 530 533 535 536
-ForStatement         : 480
-ForStatementNoShortIf : 485
-ForUpdate            : 524 526 527 528 532 534 535 536
-FormalParameter      : 292 294 296 297 301
-FormalParameterList  : 111 285 287 319 320
-FormalParameters     : 290
-Identifier           : 54 55 56 57 58 59 60 61 64 65 66 71 72 73 74 75 76 77 78 79 80 81 82 85 86 87 88 89 91 92 93 94 95 110 114 115 193 194 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 254 255 267 268 269 270 271 272 274 285 286 287 288 302 323 344 345 346 347 360 361 362 363 364 365 366 367 368 369 370 371 412 413 414 415 447 498 499 513 547 549
-IfThenElseStatement  : 478
-IfThenElseStatementNoShortIf : 483
-IfThenStatement      : 477
+EnumDeclaration      : 202
+EqualityExpression   : 151 152 154 155
+ExceptionType        : 315 316 317 318
+ExceptionTypeList    : 314
+ExclusiveOrExpression : 147 148 150
+ExplicitConstructorInvocation : 334 336
+Expression           : 33 71 72 87 88 110 120 124 141 142 195 261 518 519 520 521 522 522 524 525 526 533 535 536 538 541 543 544 546 554 555 561 562 563 590 591
+ExpressionStatement  : 498
+FieldAccess          : 35 126
+FieldDeclaration     : 248
+Finally              : 565 566
+FloatingPointType    : 398
+ForInit              : 532 535 537 538 540 543 545 546
+ForStatement         : 490
+ForStatementNoShortIf : 495
+ForUpdate            : 534 536 537 538 542 544 545 546
+FormalParameter      : 297 299 301 302 311
+FormalParameterList  : 115 290 292 329 330
+FormalParameters     : 295
+Identifier           : 54 55 56 57 58 59 60 61 62 63 64 65 68 69 70 75 76 77 78 79 80 81 82 83 84 85 86 89 90 91 92 93 95 96 97 98 99 114 118 119 199 200 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 259 260 272 273 274 275 276 277 279 290 291 292 293 312 333 354 355 356 357 370 371 372 373 374 375 376 377 378 379 380 381 422 423 424 425 457 508 509 523 557 559
+IfThenElseStatement  : 488
+IfThenElseStatementNoShortIf : 493
+IfThenStatement      : 487
 ImportDeclaration    : 10 11 11 13
 ImportDeclarations   : 1 2 4 6 13
-InclusiveOrExpression : 141 142 144
-InferredFormalParameterList : 113 115
-InstanceInitializer  : 240
-IntegralType         : 387
-InterfaceType        : 232 233 234 235 424
-InterfaceTypeList    : 231
-LabeledStatement     : 476
-LabeledStatementNoShortIf : 482
-LambdaBody           : 109
-LambdaExpression     : 107 138 188
-LambdaParameters     : 109
-LastFormalParameter  : 290 291
-LeftHandSide         : 120
-LocalVariableDeclaration : 470 538
-LocalVariableDeclarationStatement : 467
-MarkerAnnotation     : 439
-MethodBody           : 278
-MethodDeclaration    : 244
-MethodDeclarator     : 279 280 281 282
-MethodHeader         : 278
-MethodInvocation     : 37 506
+InclusiveOrExpression : 145 146 148
+InferredFormalParameterList : 117 119
+InstanceInitializer  : 245
+IntegralType         : 397
+InterfaceType        : 238 239 240 241 434
+InterfaceTypeList    : 237
+LabeledStatement     : 486
+LabeledStatementNoShortIf : 492
+LambdaBody           : 113
+LambdaExpression     : 111 142 192 194
+LambdaParameters     : 113
+LastFormalParameter  : 295 296
+LeftHandSide         : 124
+LocalVariableDeclaration : 480 548
+LocalVariableDeclarationStatement : 477
+MarkerAnnotation     : 449
+MethodBody           : 283
+MethodDeclaration    : 249
+MethodDeclarator     : 284 285 286 287
+MethodHeader         : 283
+MethodInvocation     : 37 516
 MethodReference      : 38
-Modifier             : 213 214
-Modifiers            : 197 199 201 203 205 207 209 211 214 246 278 298 300 315 318 344 345
-MultiplicativeExpression : 162 163 164 166 167 168
-Name                 : 9 16 17 32 39 42 49 66 67 69 70 71 72 73 80 81 82 85 89 91 95 121 181 194 336 337 338 339 399 403 441 442 459 460
-NormalAnnotation     : 438
-NormalClassDeclaration : 195
-NumericType          : 40 43 260 381 382
+Modifier             : 219 220
+Modifiers            : 203 205 207 209 211 213 215 217 220 251 283 325 328 354 355
+MultiplicativeExpression : 166 167 168 170 171 172
+Name                 : 9 16 17 32 39 42 49 70 71 73 74 75 76 77 84 85 86 89 93 95 99 125 185 200 346 347 348 349 409 413 451 452 469 470
+NormalAnnotation     : 448
+NormalClassDeclaration : 201
+NumericType          : 40 43 265 391 392
 PackageDeclaration   : 1 2 3 5
-PostDecrementExpression : 183 505
-PostIncrementExpression : 182 504
-PostfixExpression    : 176 184 185
-PreDecrementExpression : 170 503
-PreIncrementExpression : 169 502
-Primary              : 50 64 74 75 76 87 93 180 340 341 342 343
-PrimaryNoNewArray    : 27 68
-PrimitiveType        : 98 100 102 186 379 402
-QualifiedName        : 192
-ReceiverParameter    : 289 293 295
-Reference            : 437
-ReferenceType        : 86 92 157 187 188 380 430 436
-RelationalExpression : 149 150 151 153 154 155 156 157
-Resource             : 576 577 578 579
-ResourceList         : 574 575
-ResourceSpecification : 570 571 572 573
-Result               : 279 280 281 282
-ReturnStatement      : 493
-ShiftExpression      : 152 153 154 155 156 159 160 161
-SimpleName           : 191
-SimpleTypeName       : 319 320 321 322
-SingleElementAnnotation : 440
+PostDecrementExpression : 187 515
+PostIncrementExpression : 186 514
+PostfixExpression    : 180 188 189
+PreDecrementExpression : 174 513
+PreIncrementExpression : 173 512
+Primary              : 50 68 78 79 80 91 97 184 350 351 352 353
+PrimaryNoNewArray    : 27 72
+PrimitiveType        : 102 104 106 190 389 412
+QualifiedName        : 198
+ReceiverParameter    : 294 298 300
+Reference            : 447
+ReferenceType        : 90 96 161 191 192 193 194 390 440 446
+RelationalExpression : 153 154 155 157 158 159 160 161
+Resource             : 586 587 588 589
+ResourceList         : 584 585
+ResourceSpecification : 580 581 582 583
+Result               : 284 285 286 287
+ReturnStatement      : 503
+ShiftExpression      : 156 157 158 159 160 163 164 165
+SimpleName           : 197
+SimpleTypeName       : 329 330 331 332
+SingleElementAnnotation : 450
 SingleTypeImportDeclaration : 14
 SquareStar           : 39 40 41 47
-Statement            : 469 498 508 509 514 516 521 522 523 524 525 526 527 528 544 545
-StatementExpression  : 500 540 541 542 543
-StatementExpressionList : 537 539
-StatementNoShortIf   : 499 509 510 510 515 529 530 531 532 533 534 535 536
-StatementWithoutTrailingSubstatement : 475 481
-StaticInitializer    : 241
-Superclass           : 197 198 199 200 205 206 207 208
-Superinterfaces      : 197 198 201 202 205 206 209 210 344 347
-SynchronizedStatement : 494
-ThrowStatement       : 495
-Throws               : 279 281 315 316
-TryStatement         : 496
-TryWithResourcesStatement : 557
-Type                 : 437
-TypeArgument         : 426 427 428 429
-TypeArgumentList     : 425
-TypeArguments        : 51 53 62 71 74 77 80 85 86 87 88 89 90 267 269 271 328 330 332 335 336 337 340 341
+Statement            : 479 508 518 519 524 526 531 532 533 534 535 536 537 538 554 555
+StatementExpression  : 510 550 551 552 553
+StatementExpressionList : 547 549
+StatementNoShortIf   : 509 519 520 520 525 539 540 541 542 543 544 545 546
+StatementWithoutTrailingSubstatement : 485 491
+StaticInitializer    : 246
+Superclass           : 203 204 205 206 211 212 213 214
+Superinterfaces      : 203 204 207 208 211 212 215 216 354 357
+SynchronizedStatement : 504
+ThrowStatement       : 505
+Throws               : 284 286 325 326
+TryStatement         : 506
+TryWithResourcesStatement : 567
+Type                 : 447
+TypeArgument         : 436 437 438 439
+TypeArgumentList     : 435
+TypeArguments        : 51 53 66 75 78 81 84 89 90 91 92 93 94 272 274 276 338 340 342 345 346 347 350 351
 TypeArgumentsOrDiamond : 54 55 56 60
-TypeBound            : 413 415
+TypeBound            : 423 425
 TypeDeclaration      : 12
 TypeDeclarations     : 1 3 4 7
 TypeImportOnDemandDeclaration : 15
-TypeParameter        : 226 227 228 229
-TypeParameterList    : 225
-TypeParameterModifier : 416 417
-TypeParameterModifiers : 414 415 417
-TypeParameters       : 197 198 199 200 201 202 203 204 281 282 319 322
-TypeVariable         : 310 397 419
-UnannArrayType       : 264
-UnannClassOrInterfaceType : 262 269 270 271 272 276
-UnannClassType       : 265 273 565 566
-UnannInterfaceType   : 266
-UnannPrimitiveType   : 258 275
-UnannReferenceType   : 259
-UnannType            : 246 247 283 298 299 300 302 303 471 472 544 545 580 581
-UnannTypeVariable    : 263 277
-UnaryExpression      : 165 166 167 168 171 172 174 175 177 178 186
-UnaryExpressionNotPlusMinus : 173 187
+TypeParameter        : 232 233 234 235
+TypeParameterList    : 231
+TypeParameterModifier : 426 427
+TypeParameterModifiers : 424 425 427
+TypeParameters       : 203 204 205 206 207 208 209 210 286 287 329 332
+TypeVariable         : 320 407 429
+UnannArrayType       : 269
+UnannClassOrInterfaceType : 267 274 275 276 277 281
+UnannClassType       : 270 278 575 576
+UnannInterfaceType   : 271
+UnannPrimitiveType   : 263 280
+UnannReferenceType   : 264
+UnannType            : 251 252 288 303 304 307 308 309 310 312 313 481 482 554 555 590 591
+UnannTypeVariable    : 268 282
+UnaryExpression      : 169 170 171 172 175 176 178 179 181 182 190
+UnaryExpressionNotPlusMinus : 177 191 193
 UnqualifiedClassInstanceCreationExpression : 48 49 50
-VariableDeclarator   : 248 249 250 251
-VariableDeclaratorId : 252 253 298 299 300 544 545 563 564 580 581
-VariableDeclaratorList : 246 247 471 472
-VariableInitializer  : 23 24 25 26 252
+VariableDeclarator   : 253 254 255 256
+VariableDeclaratorId : 257 258 303 304 307 308 309 310 554 555 573 574 590 591
+VariableDeclaratorList : 251 252 481 482
+VariableInitializer  : 23 24 25 26 257
 VariableInitializerList : 19 20
-VariableModifier     : 473 474
-VariableModifierStar : 472 474 545 564 581
+VariableModifier     : 483 484
+VariableModifierStar : 303 307 309 482 484 555 574 591
 WhileStaementNoShortIf : 
-WhileStatement       : 479
-WhileStatementNoShortIf : 484
-Wildcard             : 431
-WildcardBounds       : 433 435
-catches              : 571 573
-colResourceStar      : 577 579
-comElementValuePairs : 444 446
-comElementValues     : 456 458
-comStatementExpressionStar : 541 543
-comTypeArguments     : 427 429
-oneBlockStatements   : 462
-sqAnnotations        : 406 408 410 411
-stickClassTypeStar   : 566 568
+WhileStatement       : 489
+WhileStatementNoShortIf : 494
+Wildcard             : 441
+WildcardBounds       : 443 445
+catches              : 581 583
+colResourceStar      : 587 589
+comElementValuePairs : 454 456
+comElementValues     : 466 468
+comStatementExpressionStar : 551 553
+comTypeArguments     : 437 439
+oneBlockStatements   : 472
+sqAnnotations        : 416 418 420 421
+stickClassTypeStar   : 576 578
 

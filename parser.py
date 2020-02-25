@@ -123,6 +123,13 @@ def p_CLASSORINTERFACETYPETOINSTANTIATE(p):
 										| Identifier   TypeArgumentsOrDiamond
 										| Identifier
 	'''
+
+def p_AnnoIdenStar(p):
+	'''AnnoIdenStar : '.' Annotations Identifier
+					| '.' Identifier
+					| AnnoIdenStar '.' Identifier
+					| AnnoIdenStar '.' Annotations Identifier
+	'''
 def p_TYPEARGUMENTSORDIAMOND(p):
 	'''TypeArgumentsOrDiamond : TypeArguments
 							 | '<' '>'
@@ -334,8 +341,10 @@ def p_POSTDECREMENTEXPRESSION(p):
 
 def p_CASTEXPRESSION(p): #additionalbound paren 
 	'''CastExpression : '(' PrimitiveType ')' UnaryExpression
-					| '(' ReferenceType AdditionalBoundS  ')' UnaryExpressionNotPlusMinus
-					| '(' ReferenceType AdditionalBoundS  ')' LambdaExpression
+					| '(' ReferenceType AdditionalBounds  ')' UnaryExpressionNotPlusMinus
+					| '(' ReferenceType AdditionalBounds  ')' LambdaExpression
+					| '(' ReferenceType ')' UnaryExpressionNotPlusMinus
+					| '(' ReferenceType ')' LambdaExpression
 	'''
 
 def p_CONSTANTEXPRESSION(p):
@@ -439,12 +448,8 @@ def p_ClassBody(p):
 	              | 
 	'''
 
-def p_ClassBodyeclarationStar(p):
-	''' ClassBodyeclarationStar : ClassBodyeclarationStar ClassBodyeclaration
-	'''
-
-def p_ClassBodyeclaration(p):
-	''' ClassBodyeclaration : ClassMemberDeclaration
+def p_ClassBodyDeclaration(p):
+	''' ClassBodyDeclaration : ClassMemberDeclaration
 	                           | InstanceInitializer
 							   | StaticInitializer
 							   | ConstructorDeclaration
@@ -576,12 +581,19 @@ def p_CommaFormalParameters(p):
 		'''
 
 def p_FormalParameter(p):
-		'''FormalParameter : Modifiers UnannType VariableDeclaratorId
+		'''FormalParameter : VariableModifierStar UnannType VariableDeclaratorId
 						| UnannType VariableDeclaratorId
 		'''
+def p_VariableModifier(p):
+	''' VariableModifier : Annotation
+	                   |  final
+	'''
 
 def p_LastFormalParameter(p):
-		'''LastFormalParameter :	Modifiers UnannType Annotations '.' '.' '.' VariableDeclaratorId
+		'''LastFormalParameter : VariableModifierStar UnannType Annotations '.' '.' '.' VariableDeclaratorId
+							|   UnannType Annotations '.' '.' '.' VariableDeclaratorId
+							|	VariableModifierStar UnannType  '.' '.' '.' VariableDeclaratorId
+							|	UnannType '.' '.' '.' VariableDeclaratorId
 							|	FormalParameter
 		'''
 
@@ -934,7 +946,7 @@ def p_oneBlockStatements(p):
 	'''
 
 def p_BlockStatements(p):
-	'''BlockStatements : BockStatement
+	'''BlockStatements : BlockStatement
 					   | BlockStatements BlockStatement
 	'''
 
